@@ -21,3 +21,4 @@
 * [Resources](controllers/resources.md)
 * [Views](controllers/views.md)
 * [Pages](controllers/pages.md)
+* [Components](controllers/components.md)
