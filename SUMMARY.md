@@ -18,3 +18,4 @@
 ## Controllers
 
 * [Controller](controllers/controller.md)
+* [Resources](controllers/resources.md)
