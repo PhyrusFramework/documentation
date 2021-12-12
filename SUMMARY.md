@@ -19,3 +19,4 @@
 
 * [Controller](controllers/controller.md)
 * [Resources](controllers/resources.md)
+* [Views](controllers/views.md)
