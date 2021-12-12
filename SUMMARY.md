@@ -14,3 +14,7 @@
 * [Routing strategies](routing/routing-strategies.md)
 * [Dynamic routing](routing/dynamic-routing.md)
 * [Redirections](routing/redirections.md)
+
+## Controllers
+
+* [Controller](controllers/controller.md)
