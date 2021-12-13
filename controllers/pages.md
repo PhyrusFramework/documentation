@@ -35,6 +35,22 @@ class Page extends Controller {
 
 You can also execute this lines in the **prepare** method.
 
+### Raw output
+
+By default, any page will be a HTML page with \<head> and \<body>. That's normal when you develop a website.
+
+However, if you're developing something else, like an API, you won't want this HTML wrapper. Then you need a **raw** controller, and for that you can set the raw property of the controller to true:
+
+```
+function init() {
+    $this->raw = true;
+}
+
+function display() {
+    echo JSON::stringify([...]);
+}
+```
+
 ### Include assets
 
 We may also need to add front-end assets (js, css).

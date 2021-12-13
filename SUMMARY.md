@@ -22,3 +22,4 @@
 * [Views](controllers/views.md)
 * [Pages](controllers/pages.md)
 * [Components](controllers/components.md)
+* [Middlewares](controllers/middlewares.md)

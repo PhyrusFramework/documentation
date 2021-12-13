@@ -48,7 +48,7 @@ When using a Component in your own project (located in /src/components), you can
 However, if you are using an external component (for example from a Composer third package), you need to use **an instance of the component class**.
 
 {% hint style="info" %}
-As a ComponentController is also a normal Controller, a component can also define a **$components** array of its own, and then that component will load other components..
+As a ComponentController can do whatever a common controller can, so a component can also define a **components** array and load other components.
 {% endhint %}
 
 ### PHP vs Vue Components
