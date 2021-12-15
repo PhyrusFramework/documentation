@@ -23,3 +23,10 @@
 * [Pages](controllers/pages.md)
 * [Components](controllers/components.md)
 * [Middlewares](controllers/middlewares.md)
+
+## Project Management
+
+* [Autoload](project-management/autoload.md)
+* [Path](project-management/path.md)
+* [Head\&Footer](project-management/head-and-footer.md)
+* [Assets](project-management/assets.md)
