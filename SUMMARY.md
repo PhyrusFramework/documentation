@@ -39,3 +39,5 @@
 * [DBTable](database/dbtable.md)
 * [DBGen](database/dbgen.md)
 * [Backup](database/backup.md)
+* [ORM](database/orm.md)
+* [Advanced ORM](database/advanced-orm.md)

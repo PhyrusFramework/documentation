@@ -30,10 +30,6 @@ Footer::add(function() { ?>
 <?php });
 ```
 
-{% hint style="info" %}
-The footer is hidden (display none) so don't use it to add any visual element.
-{% endhint %}
-
 ### Controlling order with priorities
 
 By default the lines will be printed in the same order you add them.
