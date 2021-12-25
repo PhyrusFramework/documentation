@@ -39,3 +39,37 @@ $users->delete([
     'ID' => [ 'IN', $ids ]
 ]);
 ```
+
+### Edit table
+
+The DBTable class also allows you to modify, create or drop tables.
+
+```
+$table = DBTable::create([
+   'name' => 'products',
+   'columns' => [
+      [
+         'name' => 'ID',
+         'type' => 'BIGINT',
+         'primary' => true,
+         'notnull' => true,
+         'auto_increment' => true
+      ],
+      [
+          'name' => 'price',
+          'type' => 'FLOAT(12, 3)'
+      ]
+   ]
+]);
+
+$table->addColumn([
+   'name' => 'code',
+   'type' => 'VARCHAR(100)',
+   'unique' => true,
+   'after' => 'ID'
+]);
+
+$table->dropColumn('price');
+
+$table->drop();
+```

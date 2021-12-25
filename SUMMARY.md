@@ -31,6 +31,7 @@
 * [Head\&Footer](project-management/head-and-footer.md)
 * [Assets](project-management/assets.md)
 * [Definitions](project-management/definitions.md)
+* [Translations](project-management/translations.md)
 
 ## Database
 
