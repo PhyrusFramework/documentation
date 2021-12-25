@@ -4,19 +4,21 @@ description: Expands the power of the ORM to another level
 
 # Advanced ORM
 
-The basic ORM class seen before is a 1:1 relation of a model class to a database table. Example: class User -> table users.
+The basic ORM class seen before is a 1:1 representation of a database table.&#x20;
 
-But, most of the times when developing any platorm, the reality is that an entity is often composed by multiple tables, commonly one of these:
+Example: class User -> table users.
+
+But, usually when developing an application, the reality is that an entity is composed of mutiple tables such as these:
 
 * **Metadata**: dynamic values
 * **Translations**: translatable strings
-* **Resources**: attached files, images
+* **Resources**: attached files, images, documents
 
-**Metadata** refers to dynamic data stored as a pair (key-value). Imagine that we have users, and we might have this information about them: address, phone, city, country, language, preferences, etc. We can't (**and must not**) create a column for each value, especially if most of them could be empty.
+**Metadata** refers to dynamic data stored as a pair (key-value). Imagine that our application has users and we might have this information about them: address, phone, city, country, language, preferences, etc. We can't (**and should not**) create a column for each value, especially if most of them could be empty because they are optional.
 
-Instead we use a different table (users\_meta) with the columns (userId, key, value), and this can store infinite dynamic and different data about each user.
+Instead we use a different table (**users\_meta**) with the columns (userId, key, value), and this can store infinite dynamic and different data about each user.
 
-So, the **AdvancedORM** class **extends the previous ORM class** but also considers an entity composed by these 4 tables:
+So, the **AdvancedORM** class **extends the previous ORM class** but also considers an entity composed of these 4 tables:
 
 * xxx
 * xxx\_metadata
@@ -35,7 +37,7 @@ class User extends AdvancedORM {
 }
 ```
 
-Then this class includes methods to control the additional features:
+Then, this class includes methods to control the additional features:
 
 ```
 $user->setMeta('address', $address);
@@ -59,7 +61,7 @@ $title = $post->getAnyTranslation('title', ['es', 'en', '*']);
 
 ### Resources
 
-Resources refers to files, like images or PDFs. However, **uploading and storing** that file in the server is up to you and not related to the ORM.
+Resources refer to files, like images or PDFs. However, **uploading and storing** the file in the server is up to you and not related to the ORM.
 
 The ORM will just store the **path** to the file. The method **addResource** will give us a **ORMResource** object.
 
@@ -81,11 +83,11 @@ However, there are **two different types** of resources:
 * Single resource (ex: Profile photo)
 * Multiple resources (ex: Album photos)
 
-In the first case, when we upload a new version, the old must be replaces (new profile photo), in the second case we can have multiple album photos and add more to the list.
+In the first case, when we upload a new version, the old must be replaced (new profile photo), in the second case we can have multiple album photos and add more to the list.
 
-So a user **can have multiple resources per name**, unlike with metadata. That's why we use **addResource** instead of setResource.
+So a user **can have multiple resources per name**, unlike with metadata. That's why we use **addResource** instead of **set**Resource.
 
-So we need to detect if there was already a resource and replace it:
+So in the first case we need to detect if there was already a resource and replace it:
 
 ```
 // Single
