@@ -22,6 +22,8 @@ $user->email = $newEmail;
 $user->save();    // Updated
 
 $user->delete();
+
+User::deleteWhere('active = 0');
 ```
 
 An ORM class must extend the **ORM** class and include a method named **Definition** with a table definition as seen in **DBGen:**
@@ -58,6 +60,31 @@ $product->price = 149.99;
 $product->save();
 ```
 
+### The constructor
+
+An ORM object can be initialized:
+
+* as new (nothing)
+* by ID
+* by query row
+
+```
+$product = new Product();  // New ID = 0
+$product = new Product(34);  // Load ID = 34
+
+$query = DB::query('SELECT * FROM products WHERE ID = 34');
+$product = new Product($query->first);
+```
+
+After saving, the ID updates with the inserted ID:
+
+```
+$product = new Product();    // ID = 0
+$product->save();            // Now ID = 34
+```
+
+### Manage table
+
 {% hint style="warning" %}
 The ORM class automatically includes two columns in the table, one named **ID (INT AUTO\_INCREMENT)** at the beginning, and another named **createdAt(DATETIME)** at the end.
 {% endhint %}
@@ -68,4 +95,17 @@ Otherwise, you can force the creation of the table by using:
 
 ```
 $product->CheckTable();
+```
+
+The name of the table can be obtained from an instance or statically:
+
+```
+$name = $product->getTable();
+$name = Product::Table();
+```
+
+You can drop the table with:
+
+```
+Product::dropTable();
 ```

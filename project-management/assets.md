@@ -47,3 +47,22 @@ Head::add(function(){ ?>
     <script src="..."></script>
 <?php );
 ```
+
+### Avoid browser caching
+
+Phyrus includes a method to avoid this annoying problem when you make a change but due to browser's cache users can't see the change at the moment.
+
+If you check your configuration file, you will see this parameter:
+
+```
+"assets": {
+    "disable-cache-after-modification-for-x-hours": 1,
+```
+
+This will automatically add a random parameter to the URL to each asset **modified in less than one hour** ago:
+
+```
+<link rel="stylesheet" src="/web/assets/css/style.css?cache=a5G3t">
+```
+
+You can change the amount of hours that cache is disabled, or **disable** this feature by setting it to **zero**.

@@ -38,6 +38,8 @@ $users->update([
 $users->delete([
     'ID' => [ 'IN', $ids ]
 ]);
+
+$users->empty(); // Delete all
 ```
 
 ### Edit table
@@ -66,7 +68,7 @@ $table->addColumn([
    'name' => 'code',
    'type' => 'VARCHAR(100)',
    'unique' => true,
-   'after' => 'ID'
+   'position' => 'AFTER ID'
 ]);
 
 $table->dropColumn('price');

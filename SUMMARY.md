@@ -42,6 +42,8 @@
 * [Backup](database/backup.md)
 * [ORM](database/orm.md)
 * [Advanced ORM](database/advanced-orm.md)
+* [Search ORMs](database/search-orms.md)
+* [Relation ORM](database/relation-orm.md)
 
 ## HTTP
 
