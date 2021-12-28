@@ -34,7 +34,7 @@ $req->offset;
 
 ### Require method and data
 
-When developing an API, you will usually want to require the request to use a specific method or to include required data, you could do it like this:
+When developing an API, you will usually want to require the request to use a specific method or to include mandatory data, you could do it like this:
 
 ```
 if (!$req->isMethod('POST'))
@@ -54,7 +54,7 @@ $req->requireMethod('GET', 'POST');
 $req->require('title', 'description');
 ```
 
-**Require** will automatically return an error **400 Bad request** if the fields are missing. **RequireMethod** will automatically return error **405 Method not allowed** if the request method is not accepted.
+**Require** will automatically return an error **400 Bad request** if any mandatory field is missing. **RequireMethod** will automatically return error **405 Method not allowed** if the request method is not accepted.
 
 ### Headers
 

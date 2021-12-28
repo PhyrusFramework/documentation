@@ -28,6 +28,7 @@
 
 * [Autoload](project-management/autoload.md)
 * [Path](project-management/path.md)
+* [Files\&Folders](project-management/files-and-folders.md)
 * [Head\&Footer](project-management/head-and-footer.md)
 * [Assets](project-management/assets.md)
 * [Definitions](project-management/definitions.md)
@@ -49,3 +50,5 @@
 
 * [As client](http/as-client.md)
 * [As server](http/as-server.md)
+* [Responses](http/responses.md)
+* [File uploads](http/file-uploads.md)
