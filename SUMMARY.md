@@ -60,3 +60,9 @@
 
 * [VueJS](front-end/vuejs.md)
 * [Vue integration](front-end/vue-integration.md)
+* [CSS/SCSS](front-end/css-scss.md)
+* [AJAX](front-end/ajax.md)
+* [HTTP](front-end/http.md)
+* [JS Utilities](front-end/js-utilities.md)
+* [Upload a file](front-end/upload-a-file.md)
+* [Google fonts](front-end/google-fonts.md)
