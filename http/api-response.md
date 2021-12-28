@@ -24,7 +24,7 @@ APIResponse::error();
 You can also use the generic method **failRequest** and specify the response type as the first parameter:
 
 ```
-APIResponse::failRequest('method-not-allowed', $message?, $data?);
+APIResponse::fail('method-not-allowed', $message?, $data?);
 ```
 
 {% hint style="info" %}
