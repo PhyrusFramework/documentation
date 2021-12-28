@@ -7,6 +7,7 @@ description: Manage files and folders from the code
 Phyrus offers you two classes: **File** and **Folder**. These will let you easily manage your files from the code:
 
 ```
+// FILE
 $file = new File($path);
 $file = File::instance($path);
 
@@ -20,4 +21,48 @@ $name = $file->name( $withExtension? = true );
 $ext = $file->extension();
 $path = $file->folder();
 $content = $file->content();
+$file->copyTo($path, $overwrite? = false);
+$file->moveTo($path, $overwrite? = false);
+
+$file = new File($path);
+$file->write('TEXT');
+$file->prepend('START:');
+$file->append(':END');
+// result:  "START:TEXT:END"
+
+$file->modification_date();
+
+$file->getMime(); // image/jpeg
+
+$base64 = $file->toBase64();
+$file = File::parseBase64($base64, $outputfile);
+
+// FOLDER
+$folder = new Folder($path);
+$folder = Folder::instance($path);
+
+if (!$folder->exists())
+    $folder->create();
+$folder->delete();
+
+$files = $folder->subfiles();
+$phpFiles = $folder->subfiles('php');
+$directories = $folder->subfolders();
+$contents = $folder->ls();  // List everything inside
+
+// Delete everything inside
+$folder->empty();
+
+$folder->parent()->delete();
+
+$folder->cd('../assets/css');  // Displace path
+
+$folder->getFile('style.css')->delete();
+
+$folder->copyTo($path);
+$folder->moveTo($newPath);
 ```
+
+{% hint style="info" %}
+In order to execute some of this actions the system requires write permissions.
+{% endhint %}
