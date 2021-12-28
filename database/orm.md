@@ -117,3 +117,24 @@ Product::deleteWhere('active = 0');
 
 Product::deleteWhere('name = :name', ['name' => $name]);
 ```
+
+### ORM to Array or JSON
+
+Any ORM can be converted to array with the method **toArray**:
+
+```
+$arr = $product->toArray();
+$json = JSON::stringify($arr);
+```
+
+If we have an array of ORM objects, we can use the **arr** method that converts an array to an **Arr** object, and then use the **map** method which acts like in Javascript:
+
+```
+$products = Product::find();
+
+$array = arr($products)->map(function($product) {
+    return $product->toArray();
+})->toArray();
+
+$json = JSON::stringify($array);
+```

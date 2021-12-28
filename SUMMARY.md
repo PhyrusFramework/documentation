@@ -52,3 +52,5 @@
 * [As server](http/as-server.md)
 * [Responses](http/responses.md)
 * [File uploads](http/file-uploads.md)
+* [Endpoints](http/endpoints.md)
+* [API Response](http/api-response.md)
