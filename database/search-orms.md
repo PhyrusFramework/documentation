@@ -34,12 +34,29 @@ user == null ?
 In the case of AdvancedORM, additionally we have other methods to find and sort by meta values or translations:
 
 ```
-$products = Product::byMeta('active');
-$products = Product::byMeta('active', '1');
-$products = Product::byMeta('category', ['electronics', 'furniture']);
+// Products with meta 'active'
+$products = Product::byMeta(['active']);
+
+// Products with meta 'active' = '1'
+$products = Product::byMeta(['active' => '1']);
+
+// Products with active = '1' AND category in ('electronics', 'furniture')
+$products = Product::byMeta([
+    'active' => '1',
+    'category' => ['electronics', 'furniture']
+]);
+
+// Products where active = '0' OR category = 'hidden'
+$products = Product::byMeta([
+    'active' => '0'
+], [
+    'category' => 'hidden'
+]);
 
 // Like search
-$products = Product::byMeta('category', '%electronic%');
+$products = Product::byMeta([
+    'category' => '%electronic%'
+]);
 
 $products = Product::byTranslation('name', '%fridge%');
 $products = Product::byTranslation('name', '%fridge%', 'en');

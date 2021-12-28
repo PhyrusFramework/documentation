@@ -109,3 +109,11 @@ You can drop the table with:
 ```
 Product::dropTable();
 ```
+
+You can delete multiple rows using a condition with **deleteWhere**:
+
+```
+Product::deleteWhere('active = 0');
+
+Product::deleteWhere('name = :name', ['name' => $name]);
+```
