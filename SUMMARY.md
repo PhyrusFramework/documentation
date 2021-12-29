@@ -74,3 +74,6 @@
 * [Utility functions](utilities/utility-functions.md)
 * [Text](utilities/text.md)
 * [Array](utilities/array.md)
+* [URL](utilities/url.md)
+* [JSON](utilities/json.md)
+* [Time](utilities/time.md)
