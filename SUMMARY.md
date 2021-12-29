@@ -63,6 +63,7 @@
 * [CSS/SCSS](front-end/css-scss.md)
 * [AJAX](front-end/ajax.md)
 * [HTTP](front-end/http.md)
+* [Eelem](front-end/eelem.md)
 * [JS Utilities](front-end/js-utilities.md)
 * [Upload a file](front-end/upload-a-file.md)
 * [Google fonts](front-end/google-fonts.md)
@@ -85,3 +86,11 @@
 * [Cronjobs](utilities/cronjobs.md)
 * [Zip](utilities/zip.md)
 * [MobileDetect](utilities/mobiledetect.md)
+
+## CLI
+
+* [Phyrus CLI](cli/phyrus-cli.md)
+* [CLI Generate](cli/cli-generate.md)
+* [Scripts](cli/scripts.md)
+* [Migrations](cli/migrations.md)
+* [Tests](cli/tests.md)
