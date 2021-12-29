@@ -1,5 +1,7 @@
 # JS Utilities
 
+### URL Utilities
+
 ```
 URL.current();
 URL.host();
@@ -7,19 +9,26 @@ URL.hostname();
 URL.parameters();
 URL.parameter( name, default? );
 
-// /page --> /page?offset=3
 URL.setParameters( {offset: 3} );
+/page --> /page?offset=3
 
-// /page/?offset=3&limit2 --> /page/?offset=7&limit=2&search=abc
 URL.addParameters( {offset: 7, search: 'abc'} );
+?offset=3&limit2 --> ?offset=7&limit=2&search=abc
 
-// Change browser URL path
+// Change browser URL path without redirecting
 //  /page --> /contact
 URL.set( '/contact' );
 URL.set( '/contact', 'Contact page');
 ```
 
+### Object management
+
 ```
+// Iterate object:
+iterate(obj, (key, value) => {
+    //...
+});
+
 // Force object to have default values:
 let obj = { filename: 'abc' }
 
@@ -31,16 +40,12 @@ obj = force( obj, {
 ```
 
 ```
-// Iterate object:
-let obj = { a: 12, b: 16, c: 19 }
-iterate(obj, (key, value) => { });
-```
-
-```
-// Empty PHP equivalent:
+// PHP Empty equivalent:
 if (empty( variable ))  // variable = false, '', 0, null, undefined
 if (empty( array ))  // length = 0
 ```
+
+### Colors
 
 ```
 // Hex -> RGB
@@ -49,6 +54,8 @@ let rgb = HexToRGB( '#4e4e4e' );  //  {r: 78, g: 78, b: 78}
 // RGB -> Hex
 let hex = RGBToHex( 78, 78, 78 );  // #4e4e4e
 ```
+
+### Strings
 
 ```
 let text = "There are {{ count }} products in the category: {{ category }}";

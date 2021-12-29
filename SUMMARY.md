@@ -66,3 +66,11 @@
 * [JS Utilities](front-end/js-utilities.md)
 * [Upload a file](front-end/upload-a-file.md)
 * [Google fonts](front-end/google-fonts.md)
+
+## Utilities
+
+* [Generic class](utilities/generic-class.md)
+* [Promise](utilities/promise.md)
+* [Utility functions](utilities/utility-functions.md)
+* [Text](utilities/text.md)
+* [Array](utilities/array.md)
