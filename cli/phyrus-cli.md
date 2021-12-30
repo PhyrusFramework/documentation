@@ -96,3 +96,23 @@ $this->flags = {
     type: 'css'
 }
 ```
+
+### Help for commands
+
+All commands have a help message they can display when used with the parameter help:
+
+```
+php cli help
+php cli generate help
+php cli config help
+```
+
+To create a **help** message, implement a help method in your command and output the message:
+
+```
+class CLI_MyCommand extends CLI_Module {
+    function help() { ?>
+        This is the help message.
+    <?php }
+}
+```

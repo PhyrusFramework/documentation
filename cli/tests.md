@@ -28,6 +28,14 @@ php cli test run
 php cli test run <name>
 ```
 
+### Generate a test by terminal
+
+Using the CLI command **generate**, you can generate a new test file automatically:
+
+```
+php cli generate test MyTest
+```
+
 ### Display and log errors
 
 A test will do checks and then, if everything goes right (success!), the terminal will display a green message:

@@ -90,7 +90,11 @@
 ## CLI
 
 * [Phyrus CLI](cli/phyrus-cli.md)
-* [CLI Generate](cli/cli-generate.md)
 * [Scripts](cli/scripts.md)
 * [Migrations](cli/migrations.md)
 * [Tests](cli/tests.md)
+* [CLI Generate](cli/cli-generate.md)
+* [CLI Config](cli/cli-config.md)
+* [CLI Cron](cli/cli-cron.md)
+* [Clear caches](cli/clear-caches.md)
+* [CLI Serve](cli/cli-serve.md)
