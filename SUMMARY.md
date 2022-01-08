@@ -86,6 +86,7 @@
 * [Cronjobs](utilities/cronjobs.md)
 * [Zip](utilities/zip.md)
 * [MobileDetect](utilities/mobiledetect.md)
+* [Sitemap](utilities/sitemap.md)
 
 ## CLI
 
