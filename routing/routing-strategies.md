@@ -2,11 +2,11 @@
 description: You can choose how to route your pages
 ---
 
-# Routing strategies
+# API Routing strategies
 
-Routing refers to decide what you see when you access a specific route of your website (https://mysite.com/contact).
+Routing means to decide what code must be executed depending on the URL being accessed.
 
-Phyrus gives you three different ways or strategies to route your page:
+Phyrus gives you three different ways or strategies to decide that:
 
 * Automatic routing
 * Manual routing
@@ -14,36 +14,40 @@ Phyrus gives you three different ways or strategies to route your page:
 
 ### Automatic routing
 
-If you place your pages under the src/pages directory, then Phyrus will automatically route the page for you by matching the name of the folder with the name of the URI.
+If you place your PHP files under the **/back-end/routes** directory, Phyrus will automatically route the page for you by matching the name of the folder with the name of the URI. For instance:
 
-For instance, https://mysite.com/contact would load /src/pages/contact.
+```
+https://mysite.com/api/users
+```
 
-{% hint style="info" %}
-Inside the page folder, you need to create a Controller, read about them later.
-{% endhint %}
+Would use:
+
+```
+/back-end/routes/api/users/index.php
+```
 
 ### Manual routing
 
-This is the classic routing that you can find in many other frameworks, you need to manually write the route and the corresponding path by code.
-
-You can do it, for example, placing a file under the /code directory, for instance, /code/routes.php.
-
-In this case you should place your pages somewhere different to avoid automatic routing, so create a different folder under /src, for example **/src/routes** or **/src/controllers**.
+With manual routing, like in other frameworks, you need to manually specify the route and what it does. **Only that here you can use the path to a file, or the action directly**:
 
 ```
-Router::add('/contact', Path::src() . '/routes/contact-page');
-```
+Router::add('/api/create', Path::back() . '/my-pages/create.php' );
 
-From this point, the page loads exactly like using automatic routing.
+// or
+Router::add('/api/create', [
+   'GET' => function($req) { ... }
+]);
+```
 
 ### Route finder
 
-The route finder consist in defining an event (a method) that will run a the moment the page is not found, and then you will have to give it the path to the page. So, instead of listing all the routes, you "**calculate**" which page to load at the moment:
+The route finder is a method that will be run when the accessed route is not recognized, before falling to **404 Not Found**. In that case you get the route as a string and have like a "last attempt" to decide what to do with it:
 
 ```
 Router::addFinder(function($route) {
-    if ($route == 'contact') {
-        return Path::src() . '/routes/contact-page';
+
+    if ($route == '/not-recognized-route') {
+        return Path::back() . '/routes/whatever/index.php';
     }
 });
 ```

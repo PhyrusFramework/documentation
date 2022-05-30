@@ -1,28 +1,26 @@
 # Table of contents
 
-* [Phyrus PHP Framework](README.md)
+* [Phyrus, the full-stack framework](README.md)
 
 ## Getting started
 
 * [Setup guide](getting-started/setup-guide.md)
+* [Connect to database](getting-started/connect-to-database.md)
 * [Project Structure](getting-started/project-structure.md)
-* [Configuration file](getting-started/configuration-file.md)
-* [Autoload](getting-started/autoload.md)
+* [Configuration](getting-started/configuration-file.md)
+* [Front-End with Nuxt](getting-started/front-end-with-nuxt.md)
 
 ## Routing
 
-* [Routing strategies](routing/routing-strategies.md)
+* [Back-End & Front-End routing](routing/back-end-and-front-end-routing.md)
+* [API Routing strategies](routing/routing-strategies.md)
 * [Dynamic routing](routing/dynamic-routing.md)
 * [Redirections](routing/redirections.md)
 
-## Controllers
+***
 
-* [Controller](controllers/controller.md)
-* [Resources](controllers/resources.md)
-* [Views](controllers/views.md)
-* [Pages](controllers/pages.md)
-* [Components](controllers/components.md)
-* [Middlewares](controllers/middlewares.md)
+* [Endpoints](endpoints.md)
+* [Middlewares](middlewares.md)
 
 ## Project Management
 
@@ -55,18 +53,6 @@
 * [Endpoints](http/endpoints.md)
 * [API Response](http/api-response.md)
 * [CORS](http/cors.md)
-
-## Front-End
-
-* [VueJS](front-end/vuejs.md)
-* [Vue integration](front-end/vue-integration.md)
-* [CSS/SCSS](front-end/css-scss.md)
-* [AJAX](front-end/ajax.md)
-* [HTTP](front-end/http.md)
-* [Eelem](front-end/eelem.md)
-* [JS Utilities](front-end/js-utilities.md)
-* [Upload a file](front-end/upload-a-file.md)
-* [Google fonts](front-end/google-fonts.md)
 
 ## Utilities
 

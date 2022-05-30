@@ -4,24 +4,12 @@ description: Folders and files you will find in the project
 
 # Project Structure
 
-Phyrus puts everything you don't need to see in the **framework composer package** (located in /**vendor/phyrus/framework**). In the root folder you will have only what you need, which is:
+Phyrus places all the framework stuff that you don't need to see or touch in the **framework composer package** directory (located in **/vendor/phyrus/framework**), so the project directory is cleaner, lighter and free of unnecessary files and code.
 
-* index.php
-* The **src** folder
-* configuration file (config.json)
-* .htaccess
-* composer.json (Dependencies)
+Phyrus is a full-stack framework composed of two halfs: **back-end** and **front-end**. **Back-End** works with PHP and with it you can develop an API, manage file uploads, the database, models, business logic and all of that. Front-End uses **Nuxt**, which is a **Vue** framework: [https://nuxtjs.org](https://nuxtjs.org/).
 
-The **src** folder is your workspace, here you will freely work and create your files without any interference from the framework.
+As you'll see, there are these two directories inside the project folder: front-end, and back-end.
 
-Inside the src folder there are the following directories:
+Finally, the **/public** folder must be configured as the **root** of your web server, and will be the one who handles the browser request to either take the browser to a PHP endpoint or a Vue page.
 
-| Folder       | Description                     |
-| ------------ | ------------------------------- |
-| /assets      | CSS, SCSS, JS, Images, Fonts... |
-| /code        | PHP Code                        |
-| /pages       | Controllers for auto-routing    |
-| /components  | Reusable components             |
-| /middlewares | Middleware controllers          |
-
-Along the docs it is explained how to use each one of these folders and the files inside.
+Keep reading to understand it all.

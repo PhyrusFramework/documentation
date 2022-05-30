@@ -2,48 +2,40 @@
 description: Configure the settings of your project
 ---
 
-# Configuration file
+# Configuration
 
-The project has a JSON configuration file in the root directory, named config.json.
+You'll find the configuration of your project inside the **/config** directory. There you will find some **YAML** files: database.yaml, web.yaml, project.yaml. Each one handles different configurations, it's just a matter of organization, you can even create your own custom yaml files.
 
-This file can store any value used by the framework, by other packages or also by you. So feel free to place anything you need here.
+While in development mode (project.yaml--> development\_mode = true) the YAML files will be combined into a **JSON** file that will appear in that folder when you run the website.
 
-{% hint style="warning" %}
-This JSON file is protected against external access by the .htaccess file included in the project. So please, make sure you use it to avoid a security hole.
-{% endhint %}
+In production mode (project.yaml --> development\_mode = false) that JSON file will **only** be created if didn't exist, so **delete** it in order to force an update.
 
-### Read/Write from configuration
+### Read/Write from Configuration
 
-In any place of the code you can get a configuration value by using the **Config** class:
+From code you can easily **read** from and **write** to the configuration files using the class **Config**:
 
 ```
-Config::get('value');
+$version = Config::get('project.version');
+// project.yaml -> version
+
+$db_user = Config::get('database.username');
+// database.yaml -> username
 ```
 
-If the value is a JSON **object**, you will get an **array**. But you can get an inner value using dot notation:
+The first word is the name of the **yaml** file, the following words are the path to the seeked value.
+
+To change the configuration, you can do it only **at runtime during this execution without writing to the files** or **overwrite the files**:
 
 ```
-Config::get('database.username');
+Config::set('project.version', '2.0'); // Only for this thread
+Config::save('project.version', '2.0'); // Write the file
 ```
 
-You can change the value of a configuration value in runtime using:
+If you save a value that didn't exist, it will be created:
 
 ```
-Config::set('some.value', $value);
+Config::save('custom.my.custom.value', 23);
+// custom.yaml --> [ my => [ custom => [ value => 23 ] ] ]
+
+$value = Config::get('custom.my.custom.value');
 ```
-
-However this method will only change the value of that configuration of this PHP execution. If instead you want to overwrite the JSON file and save the change, then use:
-
-```
-Config::save('some.value', $value);
-```
-
-### Environments
-
-One of the values in the configuration file is the **environment**. This allows you to have other configuration files in the root folder, named like: **config.\<env>.json**. For example:
-
-* config.local.json
-* config.dev.json
-* config.prod.json
-
-These JSON files **must NOT** repeat all the configurations, only the values that change. Then, the values from the selected environment will overwrite the values from the default configuration file.

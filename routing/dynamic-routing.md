@@ -4,34 +4,34 @@ description: Use dynamic parameters in the URL for routing
 
 # Dynamic routing
 
-Dynamic routing refers to using dynamic variables in the route as parameters, such as:
+Dynamic routing refers to using dynamic parameters in the route, such as:
 
 * /profile/:userId
 * /project/:projectId/members
 
-All routing strategies allow this feature.
+All routing strategies mentioned before allow this feature.
 
 ### Automatic routing
 
-With automatic routing you only have to start the directory name with an underscore to indicate that it is a parameter. For the previous examples would be:
+Automatic routing here works exactly as in Nuxt for front-end. Use directories starting with \_ to use dynamic parameters:
 
-* /src/pages/profile/pages/\_userId
-* /src/pages/project/pages/\_projectId/pages/members
+```
+/profile/:userId
 
-Later, you can retrieve this parameter in the Controller, read about controllers later.
+/back-end/routes/profile/_userId/index.php
+```
 
 ### Manual routing
 
-In the case of manual routing, parameters are specified with a colon:
+In the case of manual routing, parameters are specified with a **colon**:
 
 ```
-Router::add('/profile/:userId', Path::src() . '/routes/profile');
-Router::add('/project/:projectId/members', Path::src() . '/routes/project-members');
+Router::add('/profile/:userId', [...]);
 ```
 
 ### Route finder
 
-When using a route finder, it is your responsability to detect parameters, since you receive the accessed route directly:
+When using a route finder, it is your responsability to detect parameters, since you receive the accessed route as a string:
 
 ```
 Router::addFinder(function($route) {
