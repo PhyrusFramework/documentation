@@ -4,7 +4,7 @@ description: Autoload PHP files only when needed
 
 # Autoload
 
-One of the most amazing features of PHP is the capability of importing code files only when required using the **autoload** feature. When a class is used but it does not exist, you can then import the file containing that class, and the line will be re-executed.
+One of the most amazing features of PHP is the capability of importing code files only when required using the **autoload** feature. When a class is used but does not exist, you can then import the file containing that class (or any additional files), and the line will be re-executed.
 
 ```
 // Default PHP:
@@ -15,7 +15,7 @@ spl_autoload_register( function ($classname) {
 });
 ```
 
-Phyrus simplifies and improves this functionality with a method called **autoload**:
+Phyrus simplifies and improves this functionality with a method called simply **autoload**:
 
 ```
 // Single:

@@ -4,7 +4,7 @@ description: Manage files and folders from the code
 
 # Files\&Folders
 
-Phyrus offers you two classes: **File** and **Folder**. These will let you easily manage your files from the code:
+The classes **File** and **Folder** let you easily manage your filesystem:
 
 ```
 // FILE
@@ -30,12 +30,12 @@ $file->prepend('START:');
 $file->append(':END');
 // result:  "START:TEXT:END"
 
-$file->modification_date();
+$date = $file->modification_date();
 
 $file->getMime(); // image/jpeg
 
 $base64 = $file->toBase64();
-$file = File::parseBase64($base64, $outputfile);
+$file = File::parseBase64($base64, $outputfilepath);
 
 // FOLDER
 $folder = new Folder($path);
@@ -61,8 +61,10 @@ $folder->getFile('style.css')->delete();
 
 $folder->copyTo($path);
 $folder->moveTo($newPath);
+
+$folder->merge($anotherFolder);
 ```
 
 {% hint style="info" %}
-In order to execute some of this actions the system requires write permissions.
+In order to execute some of this actions the system may require write permissions.
 {% endhint %}

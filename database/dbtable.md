@@ -4,74 +4,45 @@ description: Table ORM
 
 # DBTable
 
-Another option to interact with the database is to use the class **DBTable**. Each instance is created for a table of the database:
+The **DBTable** object lets you manage database tables:
 
 ```
-$users = new DBTable('users');
-// or also
-$users = DBTable::instance('users');
+$t= DB::table('users');
+
+$t = DBTable::create([
+    'name' => 'users',
+    'columns' => [
+        [
+            'name' => 'username',
+            'type' => 'VARCHAR(255)',
+            'notnull' => true
+        ],
+        ...
+    ]
+]);
 ```
 
 Then we can operate using this object:
 
 ```
-$users->select('*', [
-    'email' => ['=', $email]
+$t->drop();
+
+$t->empty(); // Remove everything inside
+
+if ($t->exists())
+
+$t->addColumn([
+    'name' => 'email',
+    'type' => 'VARCHAR(255)',
+    'notnull' => true,
+    'after' => 'name'
 ]);
 
-$users->select('email', [
-    'email' => ['LIKE', '%@gmail.com']
+$t->addColumn([
+    'name' => 'parent_id',
+    'type' => 'BIGINT',
+    'foreign' => 'users(ID)'
 ]);
 
-$users->insert([
-    'email' => $email,
-    'username' => $username
-]);
-
-$users->update([
-    'active' => '0'    // set active = 0
-], [
-    'last_activity' => [ '<', $date ]
-    // where last_activity < $date
-]);
-
-$users->delete([
-    'ID' => [ 'IN', $ids ]
-]);
-
-$users->empty(); // Delete all
-```
-
-### Edit table
-
-The DBTable class also allows you to modify, create or drop tables.
-
-```
-$table = DBTable::create([
-   'name' => 'products',
-   'columns' => [
-      [
-         'name' => 'ID',
-         'type' => 'BIGINT',
-         'primary' => true,
-         'notnull' => true,
-         'auto_increment' => true
-      ],
-      [
-          'name' => 'price',
-          'type' => 'FLOAT(12, 3)'
-      ]
-   ]
-]);
-
-$table->addColumn([
-   'name' => 'code',
-   'type' => 'VARCHAR(100)',
-   'unique' => true,
-   'position' => 'AFTER ID'
-]);
-
-$table->dropColumn('price');
-
-$table->drop();
+$t->dropColumn('email');
 ```

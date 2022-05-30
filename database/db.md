@@ -4,10 +4,10 @@ description: Make SQL queries
 
 # DB
 
-In your configuration file (/config.json) you have the credentials for your database. Then you can connect to your Database using the class **DB**.
+Using the class **DB** you can access and use the database configured in your YAML configuration file:
 
 ```
-DB::query('SELECT * FROM users');
+DB::run('SELECT * FROM users');
 ```
 
 However you can connect to another database creating a new **Database** object:
@@ -19,15 +19,15 @@ $db = new Database([
     'username' => 'user',
     'password' => 'pass
 ]);
-$db->query('SELECT * FROM users');
+$db->run('SELECT * FROM users');
 ```
 
 ### QueryResult
 
-When you make a query to the database, the method will return a **DBQueryResult** object.
+When you run a query, the method will return a **DBQueryResult** object.
 
 ```
-$res = DB::query("SELECT * FROM users");
+$res = DB::run("SELECT * FROM users");
 $res->query;        // "SELECT * FROM users"
 $res->error;        // null
 $res->count;        // 34
@@ -42,15 +42,15 @@ $res->first->email;
 
 ### Prepared statements
 
-When using parameters inside of queries, you need to be **very careful**, since it may lead to a **SQL Injection attack**, especially if the parameter comes from user input.
+When using parameters inside of queries, you need to be **very careful**, since it might lead to a **SQL Injection attack**, especially if the parameter comes from user input.
 
-Example: imagine you can search a user by email, so your users write in an \<input type="email">, and then you run:
+Example: imagine your front-end allows to search a user by email, so your users write in an \<input type="email">, and then you run:
 
 ```
 SELECT * FROM users WHERE email = $email
 ```
 
-Then, a user instead of an email, coud write "; DELETE FROM users;". The query would look like:
+Then, instead of an email, a user decided to write _"; DELETE FROM users;"_. The final query would look like this:
 
 ```
 SELECT * FROM users WHERE email = ; DELETE FROM users;
@@ -71,3 +71,15 @@ The framework will place the parameters for you to prevent any kind of SQL injec
 {% hint style="info" %}
 Be aware that the variable type is important. If the parameter is a string it will be treated as text and will be wrapped with quotes, but if the parameter is a number, it won't.
 {% endhint %}
+
+### Using insecure strings
+
+Using prepared statements will convert html special characters before writing them in the database, but this can be a problem if you willingly wanted to write HTML in your database.
+
+To write HTML, you need to use an **InsecureString** object:
+
+```
+DB::query("INSERT INTO htmlBlocks (body) VALUES (:body)", [
+    'body' => new InsecureString('<script>This is JS!</script>');
+]);
+```

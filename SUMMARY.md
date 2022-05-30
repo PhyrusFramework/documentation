@@ -27,15 +27,13 @@
 * [Autoload](project-management/autoload.md)
 * [Path](project-management/path.md)
 * [Files\&Folders](project-management/files-and-folders.md)
-* [Head\&Footer](project-management/head-and-footer.md)
-* [Assets](project-management/assets.md)
-* [Definitions](project-management/definitions.md)
 * [Translations](project-management/translations.md)
+* [Definitions](project-management/definitions.md)
 
 ## Database
 
 * [DB](database/db.md)
-* [Helpers](database/helpers.md)
+* [Query](database/query.md)
 * [DBTable](database/dbtable.md)
 * [DBGen](database/dbgen.md)
 * [Backup](database/backup.md)
