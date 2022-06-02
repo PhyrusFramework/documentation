@@ -14,11 +14,7 @@ But, usually when developing an application, the reality is that an entity is co
 * **Translations**: translatable strings
 * **Resources**: attached files, images, documents
 
-**Metadata** refers to dynamic data stored as a pair (key-value). Imagine that our application has users and we might have this information about them: address, phone, city, country, language, preferences, etc. We can't (**and should not**) create a column for each value, especially if most of them could be empty because they are optional.
-
-Instead we use a different table (**users\_meta**) with the columns (userId, key, value), and this can store infinite dynamic and different data about each user.
-
-So, the **AdvancedORM** class **extends the previous ORM class** but also considers an entity composed of these 4 tables:
+The **AdvancedORM** class **extends the previous ORM class,** but also considers an entity composed of these 4 tables:
 
 * xxx
 * xxx\_metadata
@@ -26,24 +22,38 @@ So, the **AdvancedORM** class **extends the previous ORM class** but also consid
 * xxx\_resources
 
 {% hint style="info" %}
-During **development mode**, tables are automatically created **when used**, so each ORM will only create the required tables, not all of them.
+During **development mode**, tables are automatically created **when used**, but each ORM will only create the required tables when used, not all of them at once.
 {% endhint %}
 
-The declaration is exactly like a basic ORM:
+The declaration works exactly like the basic ORM:
 
 ```
 class User extends AdvancedORM {
-    function Definition() {...}
+    function Definition(DBBuilder $builder) {...}
 }
 ```
 
-Then, this class includes methods to control the additional features:
+### Metadata
+
+**Metadata** refers to dynamic data stored as a pair (key-value). Imagine that our application has users and these might have optional information about them such as: address, phone, city, country, language, preferences, etc. We can't (**and should not**) create a column for each of these values in the users table, especially if most of them could be empty because they are optional.
+
+Instead, use a different table (**users\_meta**) with the columns (userId, key, value), and this can store infinite dynamic data about each user:
+
+| user\_id | meta\_key | meta\_value         |
+| -------- | --------- | ------------------- |
+| 236      | address   | street nº9          |
+| 236      | birth     | 1982-06-23 00:00:00 |
+| 322      | address   | boulevard           |
 
 ```
 $user->setMeta('address', $address);
 $address = $user->getMeta('address');
 $user->setMeta('address', null); // remove
+```
 
+### Translations
+
+```
 $post->setTranslation('title', 'en', 'This is the title');
 $post->setTranslation('title', 'es', 'Este es el título');
 $title = $post->getTranslation('title', 'en');
@@ -61,9 +71,9 @@ $title = $post->getAnyTranslation('title', ['es', 'en', '*']);
 
 ### Resources
 
-Resources refer to files, like images or PDFs. However, **uploading and storing** the file in the server is up to you and not related to the ORM.
+Resources refer to files, like images or PDFs. However, **uploading and storing** the file in the server is up to you and not managed by the ORM.
 
-The ORM will just store the **path** to the file. The method **addResource** will give us a **ORMResource** object.
+The ORM will just store the **path** to the file. The method **addResource** will return a **ORMResource** object.
 
 ```
 $resource = $user->addResource($name, $file);
@@ -83,46 +93,47 @@ However, there are **two different types** of resources:
 * Single resource (ex: Profile photo)
 * Multiple resources (ex: Album photos)
 
-In the first case, when we upload a new version, the old must be replaced (new profile photo), in the second case we can have multiple album photos and add more to the list.
+In the first case, when the user uploads a new file, the old must be replaced (new profile photo), in the second case the user can have multiple album photos and add more to the list.
 
-So a user **can have multiple resources per name**, unlike with metadata. That's why we use **addResource** instead of **set**Resource.
+So a user **can have multiple resources of a type**. That's why the method is called **addResource** instead of **setResource**.
 
-So in the first case we need to detect if there was already a resource and replace it:
+So, in the first case we need to detect if there was already a resource and replace it:
 
 ```
 // Single
-$res = $user->getResources('profile'); // list
-if (sizeof($res) > 0) {
-    $res = $res[0]; // First resource
-    $res->setFile($newFile);
+$profilePhotos = $user->getResources('profile');
+
+if (sizeof($profilePhotos) > 0) {
+    $res = $profilePhotos[0]; // First resource
+    $profilePhotos->setFile($newFile);
 } else {
     $user->addResource('profile', $newFile);
 }
 
-// or
-$res = $user->getResource('profile'); // first
+// or also
+$res = $user->getResource('profile'); // get first result
 if ($res != null) {
     $res->setFile($newFile);
 }
 
-// Multiple
-$res = $user->addResource('profile', $file);
+// Multiple photos
+$res = $user->addResource('album', $file);
 ```
 
 #### Sorting resources
 
-When we have multiple resources, we may want to re-order them. For example, a user may want to change the order of his album photos.
+When there are multiple resources, we may want to re-order them. For example, a user may want to change the order of his album photos.
 
-So each Resource has a position property, and you will get them ordered by this position. By default the position will be the order of insertion (1, 2, 3, 4, 5...).
+So each Resource has a position property, and they will be given ordered by this position. By default the position will be the order of insertion (1, 2, 3, 4, 5...).
 
-We can re-order the resources using their **move** methods:
+But they can be re-ordered by using the **move** methods:
 
 ```
 $res = $user->getResources('photos')[3]; // Position 4
 
-$res->moveUp();  // 4 <-> 3
-$res->moveDown(); // 4 <-> 5
-$res->moveToTop(); // 4 <-> 1
-$res->moveToBottom(); // 4 <-> x
-$res->moveTo($x); // 4 <-> x
+$res->moveUp();  // 4 -> 3
+$res->moveDown(); // 4 -> 5
+$res->moveToTop(); // 4 -> 1
+$res->moveToBottom(); // 4 -> n
+$res->moveTo($x); // 4 -> x
 ```

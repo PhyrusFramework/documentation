@@ -2,9 +2,9 @@
 description: Generate tables from specification
 ---
 
-# DBGen
+# Create tables
 
-**DBGen** is a feature that lets you store the definition of one or multiple tables in a JSON file and then easily re-create those tables with a single line. Example:
+Phyrus has a method **create\_tables** that allows you to store the definition of one or multiple tables in a JSON or PHP (array) file and then easily re-create those tables with a single line. Example:
 
 ```
 [

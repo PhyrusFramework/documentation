@@ -6,14 +6,14 @@ description: Object Relational Model
 
 The framework includes an **ORM** class. An ORM (**Object Relational Model**) is a class that represents an entity of the database (for example User).
 
-Through the ORM we can automatically modify the database without making queries, just by modifying the object. Example:
+Through the ORM object we can automatically modify the database without making any queries, just by using the object in code. Example:
 
 ```
 $user = new User();
 $user->email = $email;
 $user->username = $username;
 $user->setPassword($pass);
-$user->save();  // Inserted into DB
+$user->save();  // Insert into DB
 
 $id = $user->ID;
 $user = new User($id);
@@ -26,29 +26,23 @@ $user->delete();
 User::deleteWhere('active = 0');
 ```
 
-An ORM class must extend the **ORM** class and include a method named **Definition** with a table definition as seen in **DBGen:**
+
+
+### Define Database relation
+
+The ORM class **must** define a **Definition** method which stablishes the structure of the database table. This method receives a **DBBuilder** object that you need to use to define the name and columns of the table:
 
 ```
 class Product extends ORM {
 
-    function Definition() {
-        return [
-            'name' => 'products',
-            'columns' => [
-                 [
-                     'name' => 'name',
-                     'type' => 'VARCHAR(100)'
-                 ],
-                 [
-                     'name' => 'stock',
-                     'type' => 'INTEGER'
-                 ],
-                 [
-                     'name' => 'price',
-                     'type' => 'FLOAT(12, 3)'
-                 ]
-            ]
-        ];
+    function Definition(DBBuilder $builder) {
+        
+        $builder->table('products')
+        
+        ->column('name')
+        ->column('stock', 'INTEGER')
+        ->column('price', 'FLOAT(12, 3)');
+    
     }
 
 }
@@ -66,7 +60,7 @@ An ORM object can be initialized:
 
 * as new (nothing)
 * by ID
-* by query row
+* by a query row
 
 ```
 $product = new Product();  // New ID = 0
@@ -86,10 +80,10 @@ $product->save();            // Now ID = 34
 ### Manage table
 
 {% hint style="warning" %}
-The ORM class automatically includes two columns in the table, one named **ID (INT AUTO\_INCREMENT)** at the beginning, and another named **createdAt(DATETIME)** at the end.
+The ORM class automatically adds two columns in the table, one named **ID (INT AUTO\_INCREMENT)** at the beginning, and another named **createdAt(DATETIME)** at the end.
 {% endhint %}
 
-While in **development mode** (config.json -> development\_mode: true), the **ORM Table will be created automatically** whenever you try to use the model.
+While in **development mode** (project.yaml -> development\_mode: true), the **ORM Table will be created automatically** whenever you try to use the model.
 
 Otherwise, you can force the creation of the table by using:
 
@@ -118,23 +112,21 @@ Product::deleteWhere('active = 0');
 Product::deleteWhere('name = :name', ['name' => $name]);
 ```
 
-### ORM to Array or JSON
+### ORM to Array, JSON or String
 
-Any ORM can be converted to array with the method **toArray**:
+Any ORM can be converted to an **array** by using **jsonSerialize()**:
 
 ```
-$arr = $product->toArray();
+$arr = $product->jsonSerialize();
+```
+
+An ORM object can be converted to JSON either by using the array or by converting it to a string:
+
+```
+// Method 1
+$arr = $product->jsonSerialize();
 $json = JSON::stringify($arr);
-```
 
-If we have an array of ORM objects, we can use the **arr** method that converts an array to an **Arr** object, and then use the **map** method which acts like in Javascript:
-
-```
-$products = Product::find();
-
-$array = arr($products)->map(function($product) {
-    return $product->toArray();
-})->toArray();
-
-$json = JSON::stringify($array);
+// Method 2
+$str = "JSON: $product";
 ```
