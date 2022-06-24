@@ -14,6 +14,14 @@ This password then can be verified using the native PHP function **password\_ver
 password_verify( 'watermelon', $hash );
 ```
 
+### Unique identifier (GUID)
+
+Generate a unique identifier:
+
+```
+$id = GUID();
+```
+
 ### Date now
 
 Obtain **now** as a datetime string:

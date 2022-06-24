@@ -6,7 +6,7 @@ description: Object Relational Model
 
 The framework includes an **ORM** class. An ORM (**Object Relational Model**) is a class that represents an entity of the database (for example User).
 
-Through the ORM object we can automatically modify the database without making any queries, just by using the object in code. Example:
+Through the ORM object we can automatically modify the database without making any queries, just by using the object. Example:
 
 ```
 $user = new User();
@@ -19,18 +19,18 @@ $id = $user->ID;
 $user = new User($id);
 
 $user->email = $newEmail;
-$user->save();    // Updated
+$user->save();        // Updated
+// or
+$user->save('email'); // Update only email column
 
 $user->delete();
 
 User::deleteWhere('active = 0');
 ```
 
-
-
 ### Define Database relation
 
-The ORM class **must** define a **Definition** method which stablishes the structure of the database table. This method receives a **DBBuilder** object that you need to use to define the name and columns of the table:
+The ORM class **must** declare a **Definition** method which stablishes the structure of the database table. This method receives a **DBBuilder** object that you need to use to define the name and columns of the table:
 
 ```
 class Product extends ORM {
@@ -63,14 +63,14 @@ An ORM object can be initialized:
 * by a query row
 
 ```
-$product = new Product();  // New ID = 0
+$product = new Product();    // New ID = 0
 $product = new Product(34);  // Load ID = 34
 
 $query = DB::query('SELECT * FROM products WHERE ID = 34');
 $product = new Product($query->first);
 ```
 
-After saving, the ID updates with the inserted ID:
+After saving, the ID is updated with the new ID:
 
 ```
 $product = new Product();    // ID = 0
@@ -108,7 +108,6 @@ You can delete multiple rows using a condition with **deleteWhere**:
 
 ```
 Product::deleteWhere('active = 0');
-
 Product::deleteWhere('name = :name', ['name' => $name]);
 ```
 
@@ -120,7 +119,7 @@ Any ORM can be converted to an **array** by using **jsonSerialize()**:
 $arr = $product->jsonSerialize();
 ```
 
-An ORM object can be converted to JSON either by using the array or by converting it to a string:
+An ORM object can be converted to **JSON string** either by using the array or by converting it to a string:
 
 ```
 // Method 1

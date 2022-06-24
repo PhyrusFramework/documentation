@@ -47,9 +47,11 @@ $products = Product::byMeta([
 ]);
 
 // Products where active = '0' OR category = 'hidden'
-$products = Product::byMeta([
+$products = Product::byMeta(
+[
     'active' => '0'
-], [
+], 
+[
     'category' => 'hidden'
 ]);
 
@@ -58,16 +60,24 @@ $products = Product::byMeta([
     'category' => '%electronic%'
 ]);
 
+// Products where the "name" translation contains "fridge"
 $products = Product::byTranslation('name', '%fridge%');
+
+// Products where the "name" translation in english contains "fridge"
 $products = Product::byTranslation('name', '%fridge%', 'en');
+
+// Products where the "category" translation is "Fridge" or "Refrigerador"
+// in english or spanish
 $products = Product::byTranslation('category', 
                 ['Fridge', 'Refrigerador'], ['en', 'es']);
                 
+// Products sorted by a meta value
 $products = Product::sortByMeta('position', [
     'asNumber' => true,
     'sort' => 'ASC LIMIT 10'
 ]);
 
+// Products sorted by name in english
 $products = Product::sortByTranslation('name', [
     'locale' => 'en'
 ]);

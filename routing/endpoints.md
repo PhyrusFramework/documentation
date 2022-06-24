@@ -1,9 +1,10 @@
 # Endpoints
 
-A route defines an object (an array) defining behavior of that route for each **method**:
+A route must return an object (an array) defining the behavior of that route for each **method**:
 
 ```
 // /back-end/routes/api/example/index.php
+// https://mysite.com/api/example
 
 return [
    'GET' => function($req) { },

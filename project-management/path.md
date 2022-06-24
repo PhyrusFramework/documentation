@@ -19,6 +19,10 @@ However, if you need to convert a path to relative or viceversa you can:
 $abs = Path::back();
 $rel = Path::toRelative($abs);
 $abs = Path::root() . $rel;
+
+// Relative to /public
+$rel = Path::toRelative('/public/images/x.png', true);
+// /images/x.png
 ```
 
 These are all the directories you can retrieve:

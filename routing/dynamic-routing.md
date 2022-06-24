@@ -13,7 +13,7 @@ All routing strategies mentioned before allow this feature.
 
 ### Automatic routing
 
-Automatic routing here works exactly as in Nuxt for front-end. Use directories starting with \_ to use dynamic parameters:
+Automatic routing here works exactly as in Nuxt for front-end. Use directories starting with \_ to specify that it's a dynamic parameter:
 
 ```
 /profile/:userId
@@ -37,4 +37,20 @@ When using a route finder, it is your responsability to detect parameters, since
 Router::addFinder(function($route) {
     // $route = '/profile/234' -> userId = 234
 });
+```
+
+### Recover the passed parameter
+
+The route **actions** for each method receive a second argument with an array containing the parameters in the URL:
+
+```
+Router::add('/api/profile/:userId', [
+
+    'GET' => function($request, $params) {
+    
+        $userId = intval( $params['userId'] );
+    
+    }
+
+]);
 ```

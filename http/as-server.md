@@ -15,7 +15,7 @@ $req->method();
 if ($req->isMethod('GET'))
 ```
 
-We can get the request data directly as properties:
+We can get the POST data directly as properties of the request:
 
 ```
 $req = new RequestData();
@@ -26,7 +26,7 @@ if ($req->has('username')) {
     $username = $req->username;
 }
 
-// Get also URL parameters:
+// To get also URL parameters pass true to the constructor:
 // /page?offset=34
 $req = new RequestData(true);
 $req->offset;
@@ -34,7 +34,7 @@ $req->offset;
 
 ### Require method and data
 
-When developing an API, you will usually want to require the request to use a specific method or to include mandatory data, you could do it like this:
+When developing an API, you will usually want to require the request to use a specific method or to receive mandatory data, you could do it like this:
 
 ```
 if (!$req->isMethod('POST'))
@@ -68,14 +68,14 @@ if ($req->headers->has('some-header'))
     
 $req->headers->require('some-header');
 
-$req->Auth(); // Authorization header
-$req->{'Content-Type'}
+$token = $req->Auth(); // Authorization header
+$cp = $req->{'Content-Type'}
 
 $req->require('some-header');
 ```
 
 {% hint style="info" %}
-If the AUTHORIZATION header is not working for you, make sure these lines are in your .htaccess file:
+Using Apache, if the AUTHORIZATION header is not working for you, make sure these lines are in your .htaccess file:
 
 RewriteEngine On
 

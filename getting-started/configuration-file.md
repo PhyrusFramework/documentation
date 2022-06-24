@@ -4,7 +4,7 @@ description: Configure the settings of your project
 
 # Configuration
 
-You'll find the configuration of your project inside the **/config** directory. There you will find some **YAML** files: database.yaml, web.yaml, project.yaml. Each one handles different configurations, it's just a matter of organization, you can even create your own custom yaml files.
+You'll find the configuration of your project inside the **/config** directory. There you will find some **YAML** files: database.yaml, web.yaml, project.yaml. Each one handles different configurations, it's just a matter of organization, **you can create your own custom yaml files**.
 
 While in development mode (project.yaml--> development\_mode = true) the YAML files will be combined into a **JSON** file that will appear in that folder when you run the website.
 
@@ -12,7 +12,7 @@ In production mode (project.yaml --> development\_mode = false) that JSON file w
 
 ### Read/Write from Configuration
 
-From code you can easily **read** from and **write** to the configuration files using the class **Config**:
+From code you can easily **read and** **write** from/to the configuration files using the class **Config**:
 
 ```
 $version = Config::get('project.version');
@@ -24,10 +24,10 @@ $db_user = Config::get('database.username');
 
 The first word is the name of the **yaml** file, the following words are the path to the seeked value.
 
-To change the configuration, you can do it only **at runtime during this execution without writing to the files** or **overwrite the files**:
+To programmatically modify the configuration, you can do it either **at runtime during this process without writing to the files** or **overwrite the files**:
 
 ```
-Config::set('project.version', '2.0'); // Only for this thread
+Config::set('project.version', '2.0'); // Only for this process
 Config::save('project.version', '2.0'); // Write the file
 ```
 

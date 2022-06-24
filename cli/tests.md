@@ -33,7 +33,7 @@ php cli test run <name>
 Using the CLI command **generate**, you can generate a new test file automatically:
 
 ```
-php cli generate test MyTest
+php cli test generate MyTest
 ```
 
 ### Display and log errors

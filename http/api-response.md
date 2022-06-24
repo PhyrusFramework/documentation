@@ -4,7 +4,7 @@ description: Standardize API responses
 
 # API Response
 
-When building an API a usual problem is not having standard, organized and useful responses, whether if it's a success o an error.
+When building an API a usual problem is not having standard, organized and structured responses.
 
 To help you with this, the framework gives you this **optional** tool, a class named **APIResponse**. This class will handle the response structure for you:
 
@@ -30,6 +30,25 @@ APIResponse::fail('method-not-allowed', $message?, $data?);
 {% hint style="info" %}
 You can find the list of response types in a table in the section HTTP > Responses
 {% endhint %}
+
+### Paginated lists
+
+APIResponse helps with returning a paginated response. All you need is a list of items, and indicate the pagination values:
+
+```
+APIResponse::paginate($items, [
+    'pageSize' => 10,
+    'total' => 1250,
+    'page' => 1
+]);
+
+// Or with offset
+APIResponse::paginate($items, [
+    'pageSize' => 10,
+    'total' => 1250,
+    'offset' => 50
+]);
+```
 
 ### Authentication responses
 

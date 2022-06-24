@@ -2,7 +2,7 @@
 
 Phyrus is a full-stack framework that combines Back-End (PHP) and Front-End (Nuxt Vue) in a single tool.
 
-Phyrus is a simple, intuitive and friendly framework that makes all development much easier, faster and efficient. Phyrus tries to make coding much nicer and friendly to developers, so projects become more readable, reusable and scalable.
+Phyrus is a simple, intuitive and friendly framework that makes all development much easier, faster and efficient. Phyrus tries to make coding so much nicer and friendly to developers, so projects become more readable, reusable and scalable.
 
 Find more about Phyrus in the website: https://phyrus.org
 

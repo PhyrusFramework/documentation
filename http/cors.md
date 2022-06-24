@@ -14,17 +14,15 @@ To implement CORS, clients / browsers must use **preflight** requests. That's, w
 
 If you develop your own client (mobile native app, desktop app) CORS is optional. However, if your application is intended for web (websites or mobile apps based on webviews, like Ionic), CORS is mandatory and you'll have to implement it server-side, or requests will be blocked due to the CORS protocol.
 
-Phyrus helps you with that. CORS is automatically implemented, and you can configure it through the CORS object in the configuration file:
+Phyrus helps you with that. CORS is automatically implemented, and you can configure it through the CORS object in the configuration file (web.yaml):
 
 ```
-"CORS": {
-     "origin": "*",
-     "methods": "GET, POST, OPTIONS, PUT, DELETE, PATCH",
-     "age": 86400
-}
+CORS: 
+    origin: "" 
+    methods: GET, POST, OPTIONS, PUT, DELETE, PATCH 
+    headers: "" 
+    age": 86400
 ```
-
-When clients make requests, they can use an **Origin header** to identify themselves. By default your Phyrus project will allow requests from any origin (\*), change this value to allow only specific origins.
 
 Also by default all common methods will be allowed (GET, POST, PUT, DELETE, PATCH). Add or remove methods here.
 

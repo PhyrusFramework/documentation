@@ -11,6 +11,7 @@ The classes **File** and **Folder** let you easily manage your filesystem:
 $file = new File($path);
 $file = File::instance($path);
 
+// Folder
 $folder = new Folder($path);
 $folder = Folder::instance($path);
 

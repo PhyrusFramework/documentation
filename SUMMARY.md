@@ -9,21 +9,21 @@
 * [Project Structure](getting-started/project-structure.md)
 * [Configuration](getting-started/configuration-file.md)
 * [Front-End with Nuxt](getting-started/front-end-with-nuxt.md)
+* [Publishing](getting-started/publishing.md)
 
 ## Routing
 
 * [Back-End & Front-End routing](routing/back-end-and-front-end-routing.md)
-* [API Routing strategies](routing/routing-strategies.md)
+* [Routing methods](routing/routing-strategies.md)
+* [Endpoints](routing/endpoints.md)
 * [Dynamic routing](routing/dynamic-routing.md)
+* [Middlewares](routing/middlewares.md)
+* [CRUD](routing/crud.md)
 * [Redirections](routing/redirections.md)
-
-***
-
-* [Endpoints](endpoints.md)
-* [Middlewares](middlewares.md)
 
 ## Project Management
 
+* [Back-End directories](project-management/back-end-directories.md)
 * [Autoload](project-management/autoload.md)
 * [Path](project-management/path.md)
 * [Files\&Folders](project-management/files-and-folders.md)
@@ -35,22 +35,24 @@
 * [DB](database/db.md)
 * [Query](database/query.md)
 * [DBTable](database/dbtable.md)
-* [Backup](database/backup.md)
 * [Create tables](database/create-tables.md)
 * [DBBuilder](database/dbbuilder.md)
-* [ORM](database/orm.md)
-* [Advanced ORM](database/advanced-orm.md)
-* [Search ORMs](database/search-orms.md)
-* [Relation ORM](database/relation-orm.md)
+* [Backup](database/backup.md)
+
+## ORM
+
+* [ORM](orm/orm.md)
+* [Advanced ORM](orm/advanced-orm.md)
+* [Search ORMs](orm/search-orms.md)
 
 ## HTTP
 
 * [As client](http/as-client.md)
 * [As server](http/as-server.md)
 * [Responses](http/responses.md)
-* [File uploads](http/file-uploads.md)
-* [Endpoints](http/endpoints.md)
 * [API Response](http/api-response.md)
+* [File uploads](http/file-uploads.md)
+* [Uploader](http/uploader.md)
 * [CORS](http/cors.md)
 
 ## Utilities
@@ -79,7 +81,6 @@
 * [Scripts](cli/scripts.md)
 * [Migrations](cli/migrations.md)
 * [Tests](cli/tests.md)
-* [CLI Generate](cli/cli-generate.md)
 * [CLI Config](cli/cli-config.md)
 * [CLI Cron](cli/cli-cron.md)
 * [Clear caches](cli/clear-caches.md)

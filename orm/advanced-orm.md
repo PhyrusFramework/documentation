@@ -22,7 +22,7 @@ The **AdvancedORM** class **extends the previous ORM class,** but also considers
 * xxx\_resources
 
 {% hint style="info" %}
-During **development mode**, tables are automatically created **when used**, but each ORM will only create the required tables when used, not all of them at once.
+During **development mode** tables are automatically created **when used**, but each ORM will only create the required tables when used, not all of them at once.
 {% endhint %}
 
 The declaration works exactly like the basic ORM:
@@ -51,6 +51,8 @@ $address = $user->getMeta('address');
 $user->setMeta('address', null); // remove
 ```
 
+This will allow you to easily add new data in the database without the need of modifying the structure of the database by adding or removing columns from tables.
+
 ### Translations
 
 ```
@@ -73,7 +75,7 @@ $title = $post->getAnyTranslation('title', ['es', 'en', '*']);
 
 Resources refer to files, like images or PDFs. However, **uploading and storing** the file in the server is up to you and not managed by the ORM.
 
-The ORM will just store the **path** to the file. The method **addResource** will return a **ORMResource** object.
+The ORM will just store the **path** to the file. The method **addResource** will return an **ORMResource** object.
 
 ```
 $resource = $user->addResource($name, $file);
@@ -88,14 +90,14 @@ $res = $user->getResourceById($ID);
 $res = $user->getResourceByFile($file);
 ```
 
-However, there are **two different types** of resources:
+However, there are **two different cases**:
 
 * Single resource (ex: Profile photo)
 * Multiple resources (ex: Album photos)
 
-In the first case, when the user uploads a new file, the old must be replaced (new profile photo), in the second case the user can have multiple album photos and add more to the list.
+In the first case, when the user uploads a new file, the previous must be replaced (new profile photo), in the second case the user can have multiple album photos and add more to the list.
 
-So a user **can have multiple resources of a type**. That's why the method is called **addResource** instead of **setResource**.
+So a user **can have multiple resources of a type**. That's why the method is called **addResource** instead of setResource.
 
 So, in the first case we need to detect if there was already a resource and replace it:
 
@@ -105,7 +107,7 @@ $profilePhotos = $user->getResources('profile');
 
 if (sizeof($profilePhotos) > 0) {
     $res = $profilePhotos[0]; // First resource
-    $profilePhotos->setFile($newFile);
+    $res->setFile($newFile);
 } else {
     $user->addResource('profile', $newFile);
 }
@@ -114,6 +116,8 @@ if (sizeof($profilePhotos) > 0) {
 $res = $user->getResource('profile'); // get first result
 if ($res != null) {
     $res->setFile($newFile);
+} else {
+    $user->addResource('profile', $newFile);
 }
 
 // Multiple photos
@@ -124,7 +128,7 @@ $res = $user->addResource('album', $file);
 
 When there are multiple resources, we may want to re-order them. For example, a user may want to change the order of his album photos.
 
-So each Resource has a position property, and they will be given ordered by this position. By default the position will be the order of insertion (1, 2, 3, 4, 5...).
+So each Resource has a position property, and they will be obtained sorted by this position. By default the position will be the order of insertion (1, 2, 3, 4, 5...).
 
 But they can be re-ordered by using the **move** methods:
 

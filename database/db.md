@@ -74,12 +74,22 @@ Be aware that the variable type is important. If the parameter is a string it wi
 
 ### Using insecure strings
 
-Using prepared statements will convert html special characters before writing them in the database, but this can be a problem if you willingly wanted to write HTML in your database.
+Using prepared statements will convert html special characters before writing them in the database, but this can be a problem if you willingly wanted to insert HTML in your database.
 
 To write HTML, you need to use an **InsecureString** object:
 
 ```
 DB::query("INSERT INTO htmlBlocks (body) VALUES (:body)", [
-    'body' => new InsecureString('<script>This is JS!</script>');
+    'body' => new InsecureString('<p>HTML body</p>');
 ]);
+```
+
+However, your HTML body might contain a \<script> tag inserted by the user with malicious intentions, which would lead to a **XSS Attack**, to prevent this attack, you must **remove script tags** from the body:
+
+```
+$str = new InsecureString('Code: <script>alert('error!')</script>');
+$str->removeScriptTags();
+
+echo $str->getString();
+// Output: 'Code: '
 ```
