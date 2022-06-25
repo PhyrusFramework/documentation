@@ -83,5 +83,4 @@
 * [Tests](cli/tests.md)
 * [CLI Config](cli/cli-config.md)
 * [CLI Cron](cli/cli-cron.md)
-* [Clear caches](cli/clear-caches.md)
-* [CLI Serve](cli/cli-serve.md)
+* [CLI Nuxt](cli/cli-nuxt.md)

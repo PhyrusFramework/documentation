@@ -4,7 +4,7 @@ description: Read or modify the configuration file from terminal
 
 # CLI Config
 
-The Config command is used to read or modify the project configuration file (/config.json).
+The Config command is used to read or modify the project configuration files.
 
 ```
 // Display all configuration
@@ -14,6 +14,6 @@ php cli config show
 php cli config show database
 php cli config show database.username
 
-// Change and save the JSON file:
+// Modify a configuration file
 php cli config set database.username "myDBUser"
 ```

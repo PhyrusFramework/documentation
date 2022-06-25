@@ -1,14 +1,12 @@
 # Phyrus CLI
 
-Phyrus includes an extendible CLI. This means that you can create your own custom CLI commands to execute.
+Phyrus includes a complete CLI with multiple commands to handle your project. Furthermore, is extendible. This means that you can create your own custom CLI commands to execute.
 
 The root folder of the project includes a file named "cli" without extension. That's the entry point to the CLI, and in the terminal you will run:
 
 ```
 php cli <command> <parameters> --<flags>
 ```
-
-In the next articles you will learn each CLI command provided by the framework.
 
 ### Create custom commands
 
@@ -25,7 +23,7 @@ CLI::registerModule('<command>', '<class>');
 CLI::registerModule('my-command', 'CLI_MyCommand');
 ```
 
-You can do all of this in the same file, for example, under the **/src/code** directory.
+You can do all of this in the same file, for example, under the **/back-end/code** directory.
 
 From here on, you can develop two kind of commands:
 
@@ -38,13 +36,15 @@ A single action command only uses one word (parameter):
 > php cli my-command
 ```
 
-In this case use the **run**() method:
+In this case implement the **run**() method:
 
 ```
 class CLI_MyCommand extends CLI_Module {
+    
     function run() {
         // Do something here
     }
+    
 }
 ```
 
@@ -56,7 +56,7 @@ php cli my-command actionTwo
 php cli my-command actionThree
 ```
 
-In this case, for each action create a method command\_\<name>:
+In this case, for each action create a method named **command\_\<name>**:
 
 ```
 class CLI_MyCommand extends CLI_Module {
@@ -83,27 +83,28 @@ class CLI_MyCommand extends CLI_Module {
 Inside a CLI\_Module there are three properties:
 
 * command (first parameters)
-* parameters (next parameters)
+* parameters (following parameters)
 * flags (optional values with --)
 
 ```
 php cli my-command opt-assets "./src/assets" --compress --type=css
 
+// Result:
 $this->command => 'opt-assets'
 $this->parameters => [ './src/assets' ]
-$this->flags = {
-    compress: true,
-    type: 'css'
-}
+$this->flags = [
+    compress => true,
+    type => 'css'
+]
 ```
 
 ### Help for commands
 
-All commands have a help message they can display when used with the parameter help:
+All commands have a **help** message that is displayed when used with the parameter help:
 
 ```
 php cli help
-php cli generate help
+php cli nuxt help
 php cli config help
 ```
 
@@ -111,8 +112,10 @@ To create a **help** message, implement a help method in your command and output
 
 ```
 class CLI_MyCommand extends CLI_Module {
+
     function help() { ?>
         This is the help message.
     <?php }
+    
 }
 ```
