@@ -22,15 +22,6 @@
 * [Back-End workspace](routing/back-end-workspace.md)
 * [Redirections](routing/redirections.md)
 
-## Project Management
-
-* [Back-End directories](project-management/back-end-directories.md)
-* [Autoload](project-management/autoload.md)
-* [Path](project-management/path.md)
-* [Files\&Folders](project-management/files-and-folders.md)
-* [Translations](project-management/translations.md)
-* [Definitions](project-management/definitions.md)
-
 ## Database
 
 * [DB](database/db.md)
@@ -75,6 +66,14 @@
 * [Zip](utilities/zip.md)
 * [MobileDetect](utilities/mobiledetect.md)
 * [Sitemap](utilities/sitemap.md)
+
+## Project Management
+
+* [Autoload](project-management/autoload.md)
+* [Path](project-management/path.md)
+* [Files & Folders](project-management/files-and-folders.md)
+* [Translations](project-management/translations.md)
+* [Definitions](project-management/definitions.md)
 
 ## CLI
 

@@ -29,12 +29,13 @@ These are all the directories you can retrieve:
 
 ```
 Path::root();
-Path::front();      //  /front-end
-Path::back();       //  /back-end
-Path::public();     //  /public
-Path::framework();  //  /vendor/phyrus/framework
-Path::tests();      //  /tests
-Path::code();       //  /back-end/code
-Path::middlewares();//  /back-end/middlewares
-Path::routes();     //  /back-end/routes
+Path::front();          //  /front-end
+Path::back();           //  /back-end
+Path::public();         //  /public
+Path::framework();      //  /vendor/phyrus/framework
+Path::tests();          //  /tests
+Path::middlewares();    //  /back-end/middlewares
+Path::routes();         //  /back-end/routes
+Path::publicUploads();  //  /public/uploads
+Path::privateUploads(); //  /uploads
 ```

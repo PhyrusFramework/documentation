@@ -4,15 +4,15 @@ description: Translate your application
 
 # Translations
 
-Phyrus includes a system to manage translations and languages through the **Translate** class.&#x20;
+Phyrus includes a translation system to manage translations and languages in the project. The translations can be used both in the back-end and front-end. So the same translations can be used for the website, to send emails, render PDFs, send notifications, etc.
 
-When the class is used for the first time, it gets **get installed** by adding new configurations and creating the directory and **json files** for each language (by default only english). Just run:
+When translations are used for the first time, a new YAML configuration file will appear in your configuration directory. If you don't have that configuration file yet, run this somewhere:
 
 ```
 new Translate();
 ```
 
-Then, if you check the root directory, there you should find a new folder named "**translations**", and if you look at the YAML configuration file, you will find a file named **translations.yaml**:
+Now if you check your configurations, there's a new YAML with these settings:
 
 ```
 use_cookies: true,
@@ -33,8 +33,6 @@ directory: "/translations",
 To translate, first you need to create a **Translate** object using the desired language:
 
 ```
-$lang = new Translate('en');
-// or
 $lang = Translate::use('en');
 
 // Then, get the translation
@@ -45,7 +43,7 @@ If the language is not specified, it will use the **default language**. However,
 
 ```
 $langCode = Translate::browserLanguage();
-$t = new Translate($langCode);
+$lang = Translate::use($langCode);
 ```
 
 However the user language could not be supported by your application, so you can also use this method:
@@ -54,30 +52,12 @@ However the user language could not be supported by your application, so you can
 $langCode = Translate::browserSupportedLanguage();
 ```
 
-In this case, you will get the browser language **if supported**. If not, the default language will be used. A faster way to get the Translate object is:
+In this case, you will get the browser language **if supported**. If not, the default language will be used. A faster way to get the language for the current user is:
 
 ```
-$t = Translate::use('user');
-$t->get('my.translation');
+$lang = Translate::use('user');
+$lang->get('my.translation');
 ```
-
-### Change the language
-
-The user's language can be changed by running this:
-
-```
-Translate::setLanguage('fr');
-```
-
-**If cookies are enabled**, this will create a new cookie to remember the language chosen by the user. Then, this is the language obtained when running:
-
-```
-Translate::use('user');
-```
-
-This line will use the language chosen by the user (cookie), and if the cookie does not exist, then the browser supported language, and finally the default language.
-
-**If cookies are not enabled**, the value will be stored in the session and lost soon.
 
 ### Inheritance
 
@@ -98,6 +78,24 @@ inherit:
 ```
 
 With this configuration, when using **Translate::browserSupportedLanguage()** or **Translate::instance('user')** an ukrainian user would get russian, not english.
+
+### Change the language
+
+The user's language can be changed by running this:
+
+```
+Translate::setLanguage('fr');
+```
+
+**If cookies are enabled**, this will create a new cookie to remember the language chosen by the user. Then, this is the language obtained when running:
+
+```
+Translate::use('user');
+```
+
+This line will use the language chosen by the user (cookie), and if the cookie does not exist, then the browser supported language, and finally the default language.
+
+**If cookies are not enabled**, the value will be stored in the session and lost soon.
 
 ### Parameters
 
@@ -132,5 +130,5 @@ Translate::use('en')->merge([
 If the translation already existed, it will be overwritten.
 
 {% hint style="info" %}
-**Merge** only needs to be run once, from then on, the modification will be available everywhere through new Translate instances.
+**Merge** only needs to be run once, from then on, the modification will be available everywhere.
 {% endhint %}
