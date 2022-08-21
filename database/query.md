@@ -8,27 +8,31 @@ $q = DB::query('table');
 
 Now you can use the query object to read or write from database:
 
-```
-$users = $q
+<pre><code>$users = DB::query('users')
     ->where('active', 1)
-    ->where('created_at', '<', 'NOW() - INTERVAL 1 YEAR')
     ->limit(10)
     ->offset($page)
     ->orderBy('created_at DESC')
     ->get();
     
-$users = $q
+$users = DB::query('users')
     ->whereIn('ID', [123, 456, 789])
     ->whereNotIn('ID', [321, 654, 987])
     ->select('name', 'email') // columns
     ->get();
     
+$q = DB::query('users');
+    
 $count = $q->where('active', 1)->count();
 
-$count = $q->groupBy('group_id')->count();
-    
+$count = $q
+    ->select('COUNT(*) as count')
+<strong>    ->groupBy('group_id')
+</strong><strong>    ->first()->count;
+</strong>    
 $user = $q->where('ID', 12)->first();
 
+// Delete
 $q->where('ID', 12)->delete();
 
 // New user
@@ -37,17 +41,71 @@ $q->set('name', $name)
     ->set('password', $password)
     ->insert();
 
+// Update
 $q->where('ID', 12)
     ->set('name', 'user12')
     ->set('email', $email)
     ->update();
     
-$r = DB::query('user_friends')
+$arr = DB::query('user_friends')
     ->join('users', 'user_friends.user_id = users.ID')
     ->select(
         'users.ID',
         'users.name',
         'user_friends.friend_id'
     )->get();
+    </code></pre>
+
+### Conditions
+
+You can use a simple where condition:
+
+```
+$q->where('status', 'active')
+```
+
+{% hint style="info" %}
+Keep in mind that the value type matters. Strings are wrapped with quites, numbers are not.
+{% endhint %}
+
+Optionally, you can also use an operator:
+
+```
+$q->where('price', '>=', 100)
+$q->where('email', 'LIKE', '%gmail%');
+$q->where('ID', 'IN', [1, 2, 3]);
+$q->where('ID', 'NOT IN', [1, 2, 3]);
+```
+
+Sometimes you might need to write a SQL statement yourself, for that use **rawQuery**:
+
+```
+$q->rawQuery('createdAt > NOW() - INTERVAL 1 MONTH');
+
+// Parameters
+$q->rawQuery('name = :name', [
+    'name' => $name
+]);
+```
+
+### Nested queries
+
+Search **where in** or **where not in** another table:
+
+```
+$users = DB::query('users')
+    ->whereIn('ID', 
+        DB::query('group_users')
+            ->select('user_id')
+            ->where('group_id', 3)
+    )
+    ->get();
     
+SELECT * FROM users WHERE ID IN (SELECT user_id FROM group_users WHERE group_id = 3)
+```
+
+```
+DB::query('users')
+    ->whereNotIn( ..., ... )
+    ->get();
 ```

@@ -2,24 +2,27 @@
 description: Make SQL queries
 ---
 
-# DB
+# Database
 
-Using the class **DB** you can access and use the database configured in your YAML configuration file:
+The **DATABASE** class holds the connection to a database. By default, the project has only one database with the credentials specified in the configuration file (database.yaml).
+
+&#x20;This database can be used by the shortcut **DB**:
 
 ```
-DB::run('SELECT * FROM users');
+$res = DB::run('SELECT * FROM users');
 ```
 
 However you can connect to another database creating a new **Database** object:
 
 ```
-$db = new Database([
+$db = new DATABASE([
     'host' => 'localhost',
     'database' => 'name',
     'username' => 'user',
     'password' => 'pass
 ]);
-$db->run('SELECT * FROM users');
+
+$res = $db->run('SELECT * FROM users');
 ```
 
 ### QueryResult
@@ -31,8 +34,9 @@ $res = DB::run("SELECT * FROM users");
 $res->query;        // "SELECT * FROM users"
 $res->error;        // null
 $res->count;        // 34
-$res->something;    // true (at least one result)
+$res->something;    // true (if at least one result)
 $res->result;       // array of results
+$res->first;        // first result
 
 foreach($res->result as $user) {
     $email = $user->email;
@@ -50,15 +54,11 @@ Example: imagine your front-end allows to search a user by email, so your users 
 SELECT * FROM users WHERE email = $email
 ```
 
-Then, instead of an email, a user decided to write _"; DELETE FROM users;"_. The final query would look like this:
+Then, instead of an email, a user decides to write _"; DELETE FROM users;"_. The final query would look like this:
 
-```
-SELECT * FROM users WHERE email = ; DELETE FROM users;
-```
+~~SELECT \* FROM users WHERE email = ;~~ DELETE FROM users;
 
-The first query would fail, but the second would work, and all the users in your database would be gone. 😱
-
-To protect you from these kind of attacks, queries use **prepared statements**. This basically means that you pass parameters aside:
+The first query would fail, but the second would work, and all the users in your database would be gone. 😱 To protect you from these kind of attacks, queries use **prepared statements**. This basically means that you pass parameters aside:
 
 ```
 DB::query("SELECT * FROM users WHERE email = :email", [
@@ -74,7 +74,7 @@ Be aware that the variable type is important. If the parameter is a string it wi
 
 ### Using insecure strings
 
-Using prepared statements will convert html special characters before writing them in the database, but this can be a problem if you willingly wanted to insert HTML in your database.
+Using prepared statements will convert html special characters before writing them, but this can be a problem if you willingly wanted to insert HTML in your database.
 
 To write HTML, you need to use an **InsecureString** object:
 
@@ -84,7 +84,7 @@ DB::query("INSERT INTO htmlBlocks (body) VALUES (:body)", [
 ]);
 ```
 
-However, your HTML body might contain a \<script> tag inserted by the user with malicious intentions, which would lead to a **XSS Attack**, to prevent this attack, you must **remove script tags** from the body:
+However, your HTML body might contain a \<script> tag inserted by the user with malicious intentions, which would lead to a **XSS Attack.** To prevent this attack, you must **remove script tags** from the body:
 
 ```
 $str = new InsecureString('Code: <script>alert('error!')</script>');

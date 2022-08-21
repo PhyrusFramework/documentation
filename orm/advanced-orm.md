@@ -4,9 +4,7 @@ description: Expands the power of the ORM to another level
 
 # Advanced ORM
 
-The basic ORM class seen before is a 1:1 representation of a database table.&#x20;
-
-Example: class User -> table users.
+The basic ORM class seen [before ](orm.md)is a 1:1 representation of a database table. Example: class User --> table users.
 
 But, usually when developing an application, the reality is that an entity is composed of mutiple tables such as these:
 
@@ -52,6 +50,24 @@ $user->setMeta('address', null); // remove
 ```
 
 This will allow you to easily add new data in the database without the need of modifying the structure of the database by adding or removing columns from tables.
+
+### The reference column
+
+These tables (meta, translations and resources) will reference the ID of the object in its table by a Foreign Key. By default, the foreign key column will be the same as the table + "\_id":
+
+products --> products\_id
+
+If we don't agree with this nomenclature, we can customize the name of this column with the **reference\_column** name:
+
+```
+class Product extends AdvancedORM {
+
+    function reference_column() {
+        return 'product_id';
+    }
+
+}
+```
 
 ### Translations
 
