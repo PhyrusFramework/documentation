@@ -1,26 +1,26 @@
 # Middlewares
 
-Middlewares are filters that can be reused in multiple routes with different purposes. For example, to check authentication and block access if user is not logged. But it can be used with other purposes.
+Middlewares are guards who decide whether the user can or not access a route, and they can be reused for multiple routes with different purposes. A common use is to check the authentication and block the access if the user is not logged. But it can be used with other purposes.
 
-A middleware is basically a **function**. If this function **returns false**, the access will be **blocked**.
+A middleware is basically a **function**. If this function **returns false**, the access will be **blocked**. Alternatively, the middleware can also end the code with an error code (400, 401, 403, 404...)
 
-Like routes, middlewares can be created **automatically by the filesystem** or **manually**.&#x20;
+Like routes, middlewares can be detected **automatically by the directory structure** or **be manually created by the developer**.&#x20;
 
 To create a route automatically, just create a file inside **/back-end/middlewares** returning a function that will **return false** to prevent the access:
 
 ```
 // /back-end/middlewares/auth.php
 
-return function($req) {
-   if (!$logged)
+return function($req, $params) {
+   if (!isLogged())
       return false;
 }
 ```
 
-Alternatively you can also create the middleware manually somewhere else:
+Alternatively you can also define the middleware manually somewhere else by name:
 
 ```
-Router::addMiddleware('auth', function($req) {
+Router::addMiddleware('auth', function($req, $params) {
    if (!$logged)
       return false;
 });
@@ -28,7 +28,7 @@ Router::addMiddleware('auth', function($req) {
 
 ### Use the middleware in routes
 
-To use the middleware, you can do it globally for all methods in a route, or specifically for each method:
+A middleware can be used globally for a whole route (all of its methods) or specifically for a method:
 
 ```
 // Globally
@@ -76,7 +76,7 @@ Sometimes you would want to combine multiple middlewares so you reuse the code, 
 ```
 Router::addMiddleware('my-custom', function($req) {
 
-   // First check if user is logged using 'auth' middleware
+   // First check if user is logged using the other 'auth' middleware
    if (Router::useMiddleware('auth') === FALSE) {
       return false;
    }

@@ -4,55 +4,70 @@ description: You can choose how to route your pages
 
 # Routing methods
 
-Routing means to decide what code must be executed depending on the URL being accessed.
+Routing means to decide what code must be executed depending on the URL that is being accessed. Phyrus gives you **three** different ways to decide that:
 
-Phyrus gives you **four** different methods to decide that:
-
+* CRUD (recommended)
 * Automatic routing
 * Manual routing
-* Route finder
-* CRUD
 
 ### Automatic routing
 
-If you place your PHP files under the **/back-end/routes** directory, Phyrus will automatically route the page for you by matching the name of the folder with the name of the URI. For instance:
+Doing something similar to Nuxt with page routing, Phyrus can automatically use your directory structure to guess the URL. Inside the **/back-end** directory you can use a directory named **/routes** to create your routes using the folders as path. Example
 
 ```
-https://mysite.com/api/users
-```
+/back-end/routes/contact/index.php
+mysite.com/contact
 
-Would use:
-
-```
-/back-end/routes/api/users/index.php
+/back-end/routes/api/users/_id/index.php
+mysite.com/api/users/23
 ```
 
 ### Manual routing
 
-With manual routing, like in other frameworks, you need to manually specify the route and what it does. **Only that here you can use the path to a file, or the action directly**:
+Manual Routing works like in most of other frameworks, you manually write the route and what it does. **Only that here you can use either the path to a file, or the action directly**:
 
-```
-Router::add('/api/create', Path::back() . '/my-routes/create.php' );
-
-// or
+<pre><code><strong>// file
+</strong><strong>Router::add('/api/create', Path::back() . '/my-routes/create.php' );
+</strong>
+// action
 Router::add('/api/create', [
    'GET' => function($req) { ... }
+]);</code></pre>
+
+### The Route object
+
+Both using **Automatic** or **Manual** routing, you will have to return a **Route object**. This is an array with each one of the supported methods for that route, and what it does. Example:
+
+```
+// /back-end/routes/api/users/_id/index.php
+
+return [
+    'GET' => function($req, $params) {
+        // Get the user
+        return User::findID($params->id);
+    },
+    
+    'PUT' => function($req, $params) {
+        // Edit user...
+    }
+];
+```
+
+Same with Manual routing:
+
+```
+Router::add( '/api/users/:id', [
+    'GET' => function($req, $params) {
+        // ...
+    },
+    'PUT' => function($req, $params) {
+        // ...
+    })
 ]);
 ```
 
-### Route finder
-
-The route finder is a **callback** that will be executed when the accessed route is not recognized, before giving up. In that case you will get the route as a string and have like a "last attempt" to decide what to do with it:
-
-```
-Router::addFinder(function($route) {
-
-    if ($route == '/not-recognized-route') {
-        return Path::back() . '/routes/whatever/index.php';
-    }
-});
-```
+If a route is accessed with a method that is not supported, it will return a **405 error, Method Not Allowed**.
 
 ### CRUD
 
-CRUD has its own article in this section, read it further on.
+The last and recommended way to create an API is the CRUD object. It is a bit more complex than the previous, so it deserves its own page. Read [the next chapter](crud.md) about it.

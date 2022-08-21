@@ -5,20 +5,21 @@
 ## Getting started
 
 * [Setup guide](getting-started/setup-guide.md)
-* [Connect to database](getting-started/connect-to-database.md)
+* [React or Angular](getting-started/react-or-angular.md)
 * [Project Structure](getting-started/project-structure.md)
 * [Configuration](getting-started/configuration-file.md)
 * [Front-End with Nuxt](getting-started/front-end-with-nuxt.md)
 * [Publishing](getting-started/publishing.md)
+* [Only API, remove front](getting-started/only-api-remove-front.md)
 
 ## Routing
 
 * [Back-End & Front-End routing](routing/back-end-and-front-end-routing.md)
 * [Routing methods](routing/routing-strategies.md)
-* [Endpoints](routing/endpoints.md)
-* [Dynamic routing](routing/dynamic-routing.md)
 * [Middlewares](routing/middlewares.md)
 * [CRUD](routing/crud.md)
+* [Request & Params](routing/request-and-params.md)
+* [Back-End workspace](routing/back-end-workspace.md)
 * [Redirections](routing/redirections.md)
 
 ## Project Management

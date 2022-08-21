@@ -1,8 +1,8 @@
 # CRUD
 
-CRUD stands for Create-Read-Update-Delete. It refers to the standard routes (defined by the API Rest) used to manage a model/entity.
+CRUD is a term that stands for **Create-Read-Update-Delete**. It refers to the standard routes (defined by the API Restful standard) that are normally defined to manage a model/entity in our platform.
 
-For example, imagine a platform where users post videos, then the API would offer these routes:
+For example, imagine a platform where users post videos. The API would offer routes like these:
 
 ```
 GET    /api/videos       Get list of videos
@@ -12,35 +12,70 @@ PUT    /api/videos/:id   Edit a video
 DELETE /api/videos/:id   Delete a video
 ```
 
-You could create these routes using any of the routing methods explained previously. But a faster method is using the **CRUD** class:
+You could create these routes using any of the other routing methods explained previously. But a faster and cleaner method is using the **CRUD** class:
 
-```
-$crud = new CRUD('/base');
-
-// or
-CRUD::instance('/api/videos')
-    ->list(function($req) {  // GET /api/videos
+<pre><code><strong>CRUD::instance('/api/videos')
+</strong>
+    // GET /api/videos
+    ->list(function($req) {
         return ...
     })
-    ->create(function($req) {  // POST /api/videos
+    
+    // POST /api/videos
+    ->create(function($req) {
         return ...
     })     
-    ->get(function($req, $params) {   // GET /api/videos/:id
-        $videoId = $params['id'];
+    
+    // GET /api/videos/:id
+    ->get(function($req, $params) {
+        $videoId = $params->id;
         return ...
     })         
-    ->delete(function($req, $params) { // DELETE /api/videos/:id
+    
+    // DELETE /api/videos/:id
+    ->delete(function($req, $params) {
         return ...
     })      
-    ->edit(function($req, $params) {   // PUT /api/videos/:id
+    
+    // PUT /api/videos/:id
+    ->edit(function($req, $params) {
         return ...
     })
     
-    ->generate();   // Create the routes
+    // Add routes to the Router
+    ->generate();
+    </code></pre>
+
+The CRUD class defines a base URL (/api/videos), and the has these methods: **list, get, create, edit, delete**, to define the CRUD routes.
+
+{% hint style="info" %}
+Notice that there's **five of them** instead of four, that's because the READ in C**R**UD would actually correspond to two endpoints, one to get the list of items (GET /api/videos) and another one to get a specific item (GET /api/videos/:id).
+{% endhint %}
+
+### Custom routes on a CRUD
+
+Sometimes it's also necessary to create additional features and routes on your entities. For example, imagine that users can like posted videos or add them to favorites. In that case, routes like these could serve:
+
+<pre><code><strong>PUT/DELETE /api/videos/:id/like
+</strong>PUT/DELETE /api/videos/:id/favorite</code></pre>
+
+The CRUD class allows you to add these as **custom routes**:
+
+```
+CRUD::instance('/api/videos')
+
+    ->custom('PUT', '/:id/like', function($req, $params) {
+        // ...
+    })
     
+    ->custom('DELETE', '/:id/like', function($req, $params) {
+        // ...
+    })
+    
+    ->generate();
 ```
 
-The CRUD class allows you to define these CRUD routes in a very quick and agile way.
+The custom methods specified the **method**, the route **added to the base route of the CRUD**, and finally the action.
 
 ### Middlewares with CRUD
 
@@ -53,7 +88,7 @@ CRUD::instance('/api/videos')
     ->generate();
 ```
 
-It's possible, however, that different endpoints for the same entity require different middlewares / permissions. For example, imagine that unauthenticated users can see posted videos, but not create them. Then you should use two different CRUDs:
+It's possible, however, that different endpoints for the same entity require different middlewares or permissions. For example, imagine that unauthenticated users can see posted videos, but not create them. Then you should use two different CRUDs:
 
 ```
 CRUD::instance('/api/videos')
@@ -65,22 +100,4 @@ CRUD::instance('/api/videos')
     ->middleware('auth')
     ->create()        // POST /api/videos
     ->generate();
-```
-
-### Custom routes on a CRUD
-
-Sometimes it's also necessary to create additional features and routes on your entities. For example, imagine users can like posted videos or add them to favorites. In that case, routes like these could serve:
-
-```
-/api/videos/:id/like
-/api/videos/:id/favorite
-```
-
-The CRUD class allows you to add these as **custom routes**:
-
-```
-CRUD::instance('/api/videos')
-    ->custom('POST', '/:id/like', function($req, $params) {
-        $videoId = $params['id'];
-    });
 ```
