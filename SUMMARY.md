@@ -42,13 +42,13 @@
 
 ## HTTP
 
-* [As client](http/as-client.md)
-* [As server](http/as-server.md)
+* [Request Data](http/request-data.md)
 * [Responses](http/responses.md)
 * [API Response](http/api-response.md)
 * [File uploads](http/file-uploads.md)
 * [Uploader](http/uploader.md)
 * [CORS](http/cors.md)
+* [HTTP client](http/http-client.md)
 
 ## Utilities
 
@@ -85,5 +85,5 @@
 * [Migrations](cli/migrations.md)
 * [Tests](cli/tests.md)
 * [CLI Config](cli/cli-config.md)
+* [CLI Front](cli/cli-front.md)
 * [CLI Cron](cli/cli-cron.md)
-* [CLI Nuxt](cli/cli-nuxt.md)

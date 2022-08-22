@@ -4,24 +4,24 @@ description: Uploading files through HTTP Requests
 
 # File uploads
 
-To upload a file the client will make a request to the server sending the file as data.
-
-The server will receive that file. In PHP this file is received in the global $\_FILES variable, however with Phyrus you can just use the same **RequestData** object:
+To upload a file, first the client will make a request to the server sending the file. That part is not explained here. The server will receive that file. In PHP this file is listed in the global $\_FILES variable, but Phyrus lets you use the same **RequestData** object that is used for POST data:
 
 ```
 $req = new RequestData();
 
-if (!$req->hasFiles()) // at least 1
-    response_die('bad');
+// Check if at least 1 file received
+if (!$req->hasFiles())
+    ApiResponse::badRequest();
 
-if (!$req->hasFile('photo')) // specific file named 'photo'
-    response_die('bad');
+// specific file named 'photo'
+if (!$req->hasFile('photo'))
+    ApiResponse::badRequest();
 
 // or directly
 $req->requireFile('photo');
 
 $photo = $req->getFile('photo');
-$photo->tmp;  // Path to uploaded temporary file
+$photo->tmp;  // Path to temporary file
 $photo->name; // 'my_photo.jpg'
 $photo->type; // 'image/jpeg'
 $photo->extension;  // 'jpg' (if name includes it)
@@ -35,5 +35,5 @@ File::instance($file->tmp)->copyTo($newpath);
 ```
 
 {% hint style="info" %}
-If the file is an image, perhaps you want to resize it first, or generate thumbnails. You can do that with the **Image** class, check it in the section **Utilities**.
+If the file is an image, perhaps you want to resize it or generate thumbnails. You can do that with the [**Image**](../utilities/images.md) **** class, check it in the section **Utilities**.
 {% endhint %}

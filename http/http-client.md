@@ -2,7 +2,7 @@
 description: Launch HTTP requests as client
 ---
 
-# As client
+# HTTP client
 
 Phyrus includes an integrated HTTP client capable of easily make requests to an API.
 
@@ -32,6 +32,14 @@ http::get( $url )
 ->finally(function($arg) {
 
 });
+
+// synchronously:
+$promise = http::get($url);
+
+if ($promise->isSuccess())
+    $response = $promise->getResponse();
+else
+    $error = $promise->getError();
 ```
 
 These are the **options** of the request:

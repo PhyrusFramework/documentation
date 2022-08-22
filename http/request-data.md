@@ -2,20 +2,20 @@
 description: Receive HTTP requests as server
 ---
 
-# As server
+# Request Data
 
-Everytime the website is accessed, we can instantiate an object of the class **RequestData** to get information about the request:
+Everytime the website is accessed, you can instantiate an object of the class **RequestData** to get information about the request:
 
 ```
 $req = new RequestData();
 // or
 $req = RequestData::instance();
 
-$req->method();
+$m = $req->method();
 if ($req->isMethod('GET'))
 ```
 
-We can get the POST data directly as properties of the request:
+POST data can be accessed directly as properties of this object:
 
 ```
 $req = new RequestData();
@@ -25,16 +25,22 @@ $req->username
 if ($req->has('username')) {
     $username = $req->username;
 }
+```
 
-// To get also URL parameters pass true to the constructor:
-// /page?offset=34
+If the constructor of RequestData gets **true** as parameter, it will also include **Query params**:
+
+```
 $req = new RequestData(true);
+// or
+$req = RequestData::instance(true);
+
+// /page?offset=34
 $req->offset;
 ```
 
 ### Require method and data
 
-When developing an API, you will usually want to require the request to use a specific method or to receive mandatory data, you could do it like this:
+When developing an API, you will usually need to require the client to use a specific method or to send some required data in the request. You could do it like this:
 
 ```
 if (!$req->isMethod('POST'))
@@ -56,9 +62,15 @@ $req->require('title', 'description');
 
 **Require** will automatically return an error **400 Bad request** if any mandatory field is missing. **RequireMethod** will automatically return error **405 Method not allowed** if the request method is not accepted.
 
+{% hint style="info" %}
+In development mode, **require** will tell the client which field is missing. In production this information is hidden.
+
+However, if you need to customize the response message, you can do it by checking the data yourself instead of using this method.
+{% endhint %}
+
 ### Headers
 
-The request headers can be obtained through the **headers** object of the RequestData:
+The request headers can also be obtained through the RequestData object:
 
 ```
 $req = new RequestData();
@@ -69,7 +81,7 @@ if ($req->headers->has('some-header'))
 $req->headers->require('some-header');
 
 $token = $req->Auth(); // Authorization header
-$cp = $req->{'Content-Type'}
+$ct = $req->{'Content-Type'}
 
 $req->require('some-header');
 ```

@@ -4,20 +4,32 @@ description: HTTP Responses
 
 # Responses
 
-By default, any page (except for 404 Not found) will automatically return a response 200 OK.
-
-However, especially if developing an API, you will want to return specific response codes and messages (400, 401, 403, 404, 405...).
-
-For that, Phyrus helps you with this task so you don't have to remember every code and what it means. You can just use the method **response**:
+By default, any route will automatically return a response 200 OK. But an API will need to return specific response codes and messages (400, 401, 403, 404, 405...). That can be done with the **response** method:
 
 ```
-response('bad');
-response('forbidden');
-response('unauthorized');
-response('not-found');
-response('ok');
-response('method-not-allowed');
+response(400);
+
+// To end the process:
+response_die(400);
+
+// With header text:
+response([
+    400 => 'HTTP/1.0 400 Bad Request'
+]);
 ```
+
+However, Phyrus helps you with this task so you don't have to remember every code and what it means. You can just use the method **response** with a **string**:
+
+```
+response('bad');                // 400
+response('forbidden');          // 403
+response('unauthorized');       // 401
+response('not-found');          // 404
+response('ok');                 // 200
+response('method-not-allowed'); // 405
+```
+
+### Response data
 
 Optionally, you can add a second parameter which will be the body of the response:
 
@@ -25,7 +37,7 @@ Optionally, you can add a second parameter which will be the body of the respons
 response('bad', 'Name field is missing');
 ```
 
-If the parameter is an array, it will be automatically parsed to **JSON**:
+If the parameter is an array, it will be automatically converted to **JSON**:
 
 ```
 response('bad', [
