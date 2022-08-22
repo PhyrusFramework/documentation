@@ -34,8 +34,11 @@
 
 * [ORM](orm/orm.md)
 * [Advanced ORM](orm/advanced-orm.md)
-* [ORM Serialization](orm/orm-serialization.md)
+* [Metadata](orm/metadata.md)
+* [Translations](orm/translations.md)
+* [Resources](orm/resources.md)
 * [Search ORMs](orm/search-orms.md)
+* [ORM Serialization](orm/orm-serialization.md)
 
 ## HTTP
 

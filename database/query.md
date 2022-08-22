@@ -88,6 +88,20 @@ $q->rawQuery('name = :name', [
 ]);
 ```
 
+### OR
+
+You can control AND and OR operators with the **or()** method:
+
+```
+$query
+    ->where('a', '1')
+    ->where('b', '2')
+    ->or()
+    ->where('c', 3);
+    
+WHERE (a = '1' AND b = '2') OR (c = 3)
+```
+
 ### Nested queries
 
 Search **where in** or **where not in** another table:
