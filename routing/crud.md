@@ -14,7 +14,7 @@ DELETE /api/videos/:id   Delete a video
 
 You could create these routes using any of the other routing methods explained previously. But a faster and cleaner method is using the **CRUD** class:
 
-<pre class="language-php"><code class="lang-php"><strong>CRUD::instance('/api/videos')
+<pre><code><strong>CRUD::instance('/api/videos')
 </strong>
     // GET /api/videos
     ->list(function($req) {
@@ -61,7 +61,7 @@ Sometimes it's also necessary to create additional features and routes on your e
 
 The CRUD class allows you to add these as **custom routes**:
 
-```php
+```
 CRUD::instance('/api/videos')
 
     ->custom('PUT', '/:id/like', function($req, $params) {
@@ -81,7 +81,7 @@ The custom methods specified the **method**, the route **added to the base route
 
 A CRUD can also use a middleware for its routes:
 
-```php
+```
 CRUD::instance('/api/videos')
     ->middleware('auth')
     ->delete()        // DELETE /api/videos/:id
@@ -90,7 +90,7 @@ CRUD::instance('/api/videos')
 
 It's possible, however, that different endpoints for the same entity require different middlewares or permissions. For example, imagine that unauthenticated users can see posted videos, but not create them. Then you should use two different CRUDs:
 
-```php
+```
 CRUD::instance('/api/videos')
     ->list()        // GET/api/videos
     ->generate();

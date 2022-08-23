@@ -6,7 +6,7 @@ description: Launch HTTP requests as client
 
 Phyrus includes an integrated HTTP client capable of easily make requests to an API.
 
-```php
+```
 http::get( $url, $options );
 http::post( $url, $options );
 http::put( $url, $options );
@@ -17,7 +17,7 @@ http::req( $method, $url, $options );
 
 A request returns a **Promise**, a class that works exactly like in Javascript:
 
-```php
+```
 http::get( $url )
 
 // If request was successfull:

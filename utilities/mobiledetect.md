@@ -1,8 +1,8 @@
 # MobileDetect
 
-MobileDetect is a class that lets you know if the user is using a phone and his OS (Android, iOS) and device (phone or tablet). It's not 100% accurate but works in most of cases.
+**MobileDetect** is a class that tells whether the user is using a phone, a tablet or a computer, and his OS (Android, iOS). It's not 100% accurate but works in most of cases.
 
-```
+```php
 if ( MobileDetect::isMobile() )  // Phone or tablet
 if ( MobileDetect::isPhone() )
 if ( MobilelDetect::isTablet() )

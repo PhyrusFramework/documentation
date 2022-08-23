@@ -2,11 +2,11 @@
 description: Manage files and folders from the code
 ---
 
-# Files\&Folders
+# Files & Folders
 
 The classes **File** and **Folder** let you easily manage your filesystem:
 
-```
+```php
 // FILE
 $file = new File($path);
 $file = File::instance($path);

@@ -26,7 +26,7 @@ mysite.com/api/users/23
 
 Manual Routing works like in most of other frameworks, you manually write the route and what it does. **Only that here you can use either the path to a file, or the action directly**:
 
-<pre class="language-php"><code class="lang-php"><strong>// file
+<pre><code><strong>// file
 </strong><strong>Router::add('/api/create', Path::back() . '/my-routes/create.php' );
 </strong>
 // action
@@ -34,19 +34,11 @@ Router::add('/api/create', [
    'GET' => function($req) { ... }
 ]);</code></pre>
 
-### Redirections
-
-Using the **Router** class, you can easily make a 301 Redirection:
-
-```php
-Router::redirectTo('/');
-```
-
 ### The Route object
 
 Both using **Automatic** or **Manual** routing, you will have to return a **Route object**. This is an array with each one of the supported methods for that route, and what it does. Example:
 
-```php
+```
 // /back-end/routes/api/users/_id/index.php
 
 return [
@@ -63,7 +55,7 @@ return [
 
 Same with Manual routing:
 
-```php
+```
 Router::add( '/api/users/:id', [
     'GET' => function($req, $params) {
         // ...

@@ -8,7 +8,7 @@ Both simple ORMs and Advanced ORMs have methods to easily search and find entrie
 
 All ORMs have the methods **find** (list), **findOne** (item) and **findID** (item):
 
-```php
+```
 $users = User::find(); // find all
 $products = Product::find('stock > 0'); // WHERE
 
@@ -27,7 +27,7 @@ The **findID** method autoamtically converts the parameter to a number, so you c
 
 Another option is tu use the [Query](../database/query.md) object:
 
-```php
+```
 $users = User::query()
         ->where('status', 'active')
         ->orderBy('username DESC')
@@ -44,7 +44,7 @@ $user = User::query()
 
 In the case of the **AdvancedORM**, additionally there are other methods to find and sort elements by their meta values or translations:
 
-```php
+```
 // Products with meta 'active' and any value
 $products = Product::byMeta(['active']);
 
@@ -97,7 +97,7 @@ $products = Product::sortByTranslation('name', [
 
 If you need more complex queries, then you should consider using the **Query** object:
 
-```php
+```
 $users = User::query()
     ->whereIn( 'ID', DB::query('users_meta')
                         ->where('meta_key', 'verified')

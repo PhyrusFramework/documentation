@@ -6,7 +6,7 @@ description: Easily generate a database backup
 
 The database object has a method named **Backup** that lets you export the database into a .sql file:
 
-```php
+```
 DB::backup( __DIR__ . '/backup.sql' );
 
 DB::backup( $path, [

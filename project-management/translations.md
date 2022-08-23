@@ -8,13 +8,13 @@ Phyrus includes a translation system to manage translations and languages in the
 
 When translations are used for the first time, a new YAML configuration file will appear in your configuration directory. If you don't have that configuration file yet, run this somewhere:
 
-```
+```php
 new Translate();
 ```
 
 Now if you check your configurations, there's a new YAML with these settings:
 
-```
+```php
 use_cookies: true,
 default_language: "en",
 supported_languages: ["en"],
@@ -32,7 +32,7 @@ directory: "/translations",
 
 To translate, first you need to create a **Translate** object using the desired language:
 
-```
+```php
 $lang = Translate::use('en');
 
 // Then, get the translation
@@ -41,20 +41,20 @@ $text = $lang->get('my.translation');
 
 If the language is not specified, it will use the **default language**. However, you can also detect the user's language automatically:
 
-```
+```php
 $langCode = Translate::browserLanguage();
 $lang = Translate::use($langCode);
 ```
 
 However the user language could not be supported by your application, so you can also use this method:
 
-```
+```php
 $langCode = Translate::browserSupportedLanguage();
 ```
 
 In this case, you will get the browser language **if supported**. If not, the default language will be used. A faster way to get the language for the current user is:
 
-```
+```php
 $lang = Translate::use('user');
 $lang->get('my.translation');
 ```
@@ -83,13 +83,13 @@ With this configuration, when using **Translate::browserSupportedLanguage()** or
 
 The user's language can be changed by running this:
 
-```
+```php
 Translate::setLanguage('fr');
 ```
 
 **If cookies are enabled**, this will create a new cookie to remember the language chosen by the user. Then, this is the language obtained when running:
 
-```
+```php
 Translate::use('user');
 ```
 
@@ -101,7 +101,7 @@ This line will use the language chosen by the user (cookie), and if the cookie d
 
 Translations can carry dynamic parameters:
 
-```
+```php
 // JSON
 "product": {
     "price": "The price is {{price}}$"
@@ -117,7 +117,7 @@ Translations are stored as JSON files in your translations directory. However, y
 
 To do it, you need to **merge** an array to the current translations:
 
-```
+```php
 Translate::use('en')->merge([
     'pages' => [
         'checkout' => [

@@ -8,18 +8,18 @@ The Front CLI command is used to manage the front-end project from the root fold
 
 ```
 // Run the website in localhost:3000 (npm run dev)
-php cli front run
+php phyrus front run
 
 // Compile the project and bring the files to the /public directory.
-php cli front sync
+php phyrus front sync
 
 // Generate a page in /front-end/pages
-php cli front page <name>
+php phyrus front page <name>
 
 // Generate a component in /front-end/components
-php cli front component <name>
+php phyrus front component <name>
 
 // Remove front-end support from this project.
-php cli front remove
+php phyrus front remove
 ```
 

@@ -8,14 +8,14 @@ The Path class will give you the path, absolute or relative, to any directory in
 
 All methods receive a parameter true/false to indicate if you want the absolute(false) or relative(true) path:
 
-```
+```php
 Path::root(); // absolute
 Path::root(true); // relative
 ```
 
 However, if you need to convert a path to relative or viceversa you can:
 
-```
+```php
 $abs = Path::back();
 $rel = Path::toRelative($abs);
 $abs = Path::root() . $rel;
@@ -27,7 +27,7 @@ $rel = Path::toRelative('/public/images/x.png', true);
 
 These are all the directories you can retrieve:
 
-```
+```php
 Path::root();
 Path::front();          //  /front-end
 Path::back();           //  /back-end

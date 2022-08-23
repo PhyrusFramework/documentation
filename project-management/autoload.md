@@ -8,7 +8,7 @@ One of the most amazing features of PHP is the capability of importing a file on
 
 To do it, you can define a **callback** that is called whenever an unknown class is used:
 
-```
+```php
 // Default PHP:
 spl_autoload_register( function ($classname) {
     if ($classname == 'MyClass') {
@@ -20,7 +20,7 @@ spl_autoload_register( function ($classname) {
 
 Phyrus simplifies and improves this functionality with a method called simply **autoload**:
 
-```
+```php
 // Single:
 autoload( 'MyClass', __DIR__ . '/MyClass.php' );
 

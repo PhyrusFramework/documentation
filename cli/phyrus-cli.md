@@ -1,29 +1,29 @@
 # Phyrus CLI
 
-Phyrus includes a complete CLI with multiple commands to handle your project. Furthermore, is extendible. This means that you can create your own custom CLI commands to execute.
+Phyrus includes a custom CLI with multiple commands to manage your project. Furthermore, this CLI is extendible. This means that you can create your own custom CLI commands.
 
-The root folder of the project includes a file named "cli" without extension. That's the entry point to the CLI, and in the terminal you will run:
+The root folder of the project includes a file named "phyrus" without extension. That's the entry point to the CLI, and in the terminal you will run:
 
 ```
-php cli <command> <parameters> --<flags>
+php phyrus <command> <parameters> --<flags>
 ```
 
 ### Create custom commands
 
 To create a custom CLI command first you need to create a class extending the **CLI\_Module** class:
 
-```
+```php
 class CLI_MyCommand extends CLI_Module { }
 ```
 
-Then you need to use:
+Then you need to register this module to the CLI:
 
-```
+```php
 CLI::registerModule('<command>', '<class>');
 CLI::registerModule('my-command', 'CLI_MyCommand');
 ```
 
-You can do all of this in the same file, for example, under the **/back-end/code** directory.
+You can do all of this in the same file, for example, under the **/back-end** directory.
 
 From here on, you can develop two kind of commands:
 
@@ -33,12 +33,12 @@ From here on, you can develop two kind of commands:
 A single action command only uses one word (parameter):
 
 ```
-> php cli my-command
+> php phyrus my-command
 ```
 
 In this case implement the **run**() method:
 
-```
+```php
 class CLI_MyCommand extends CLI_Module {
     
     function run() {
@@ -48,17 +48,17 @@ class CLI_MyCommand extends CLI_Module {
 }
 ```
 
-A command with sub-actions uses a second command:
+A command with sub-actions uses a second command after the first one:
 
 ```
-php cli my-command actionOne
-php cli my-command actionTwo
-php cli my-command actionThree
+php phyrus my-command actionOne
+php phyrus my-command actionTwo
+php phyrus my-command actionThree
 ```
 
 In this case, for each action create a method named **command\_\<name>**:
 
-```
+```php
 class CLI_MyCommand extends CLI_Module {
     
     function command_actionOne() {
@@ -70,7 +70,7 @@ class CLI_MyCommand extends CLI_Module {
     }
     
     // If run() is implemented, it overrides the
-    // previous methods:
+    // previous methods, so you have to check it yourself.
     function run() {
         if ($this->command == 'actionOne')
             // do something...
@@ -80,14 +80,14 @@ class CLI_MyCommand extends CLI_Module {
 }
 ```
 
-Inside a CLI\_Module there are three properties:
+In a **CLI\_Module** there are three **properties**:
 
-* command (first parameters)
+* command (first parameter)
 * parameters (following parameters)
-* flags (optional values with --)
+* flags (parameters starting with --)
 
-```
-php cli my-command opt-assets "./src/assets" --compress --type=css
+```php
+php phyrus my-command opt-assets "./src/assets" --compress --type=css
 
 // Result:
 $this->command => 'opt-assets'
@@ -103,14 +103,14 @@ $this->flags = [
 All commands have a **help** message that is displayed when used with the parameter help:
 
 ```
-php cli help
-php cli nuxt help
-php cli config help
+php phyrus help
+php phyrus front help
+php phyrus config help
 ```
 
 To create a **help** message, implement a help method in your command and output the message:
 
-```
+```php
 class CLI_MyCommand extends CLI_Module {
 
     function help() { ?>

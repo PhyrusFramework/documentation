@@ -18,7 +18,7 @@ If for some reason you couldn't do it, then manually delete the file /vendor/phy
 
 From the code you can easily **read and** **write** from/to the configuration files using the class **Config**:
 
-```php
+```
 $version = Config::get('project.version');
 // project.yaml -> version
 
@@ -33,14 +33,14 @@ The first word is the name of the **yaml** file, the following words are the pat
 
 To programmatically change a configuration, you can do it either **at runtime without overwriting the files** or **overwrite the files**:
 
-```php
+```
 Config::set('project.version', '2.0'); // Only for this process
 Config::save('project.version', '2.0'); // Write the file
 ```
 
 If you save a value that didn't exist, it will be created. If a YAML file needs to be created, it will:
 
-```php
+```
 Config::save('custom.my.custom.value', 23);
 // custom.yaml --> [ my => [ custom => [ value => 23 ] ] ]
 

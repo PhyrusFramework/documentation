@@ -4,10 +4,10 @@
 This class requires the **zlib** php extension.
 {% endhint %}
 
-The Zip class lets you easily compress and uncompress files into a zip file.
+The Zip class lets you easily compress and uncompress files using zip files.
 
-```
-// Create empty zip
+```php
+// Create an empty zip
 $zip = new Zip();
 
 // Load existing zip
@@ -24,28 +24,28 @@ $zip->add( $image, '/resources/' );
 $zip->add( $image, '/resources/', 'logo.png' );    
 ```
 
-You can also add Data directly into the zip:
+Besides using the path to a file, you can also directly add Data into the zip:
 
-```
+```php
 $data = file_get_contents( $file );
 $zip->addData( $data, 'image.jpg' );
 ```
 
 You can add a full directory and all files inside:
 
-```
+```php
 $zip->addDirectory( $path );
 ```
 
-Finally the ZIP files can be saved to a file:
+Finally the ZIP file can be saved to a file:
 
-```
+```php
 $zip->save( $path );
 ```
 
 An existing Zip can be extracred:
 
-```
+```php
 Zip::instance( $path )->extract( __DIR__ ); 
 // Extract in this directory
 ```

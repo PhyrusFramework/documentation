@@ -11,12 +11,12 @@ Beware that cronjobs only work on linux servers, not windows
 {% endhint %}
 
 ```
-php cli cron list
+php phyrus cron list
 
-php cli cron delete --all
-php cli cron delete --index=2  // From the list
-php cli cron delete --command="0 2 * * * /bin/sh backup.sh"
+php phyrus cron delete --all
+php phyrus cron delete --index=2  // From the list
+php phyrus cron delete --command="0 2 * * * /bin/sh backup.sh"
 
-php cli cron create "0 2 * * * /bin/sh backup.sh"
-php cli cron create "/bin/sh backup.sh" --interval="0 2 * * *"
+php phyrus cron create "0 2 * * * /bin/sh backup.sh"
+php phyrus cron create "/bin/sh backup.sh" --interval="0 2 * * *"
 ```

@@ -1,6 +1,6 @@
 # Translations
 
-```php
+```
 $post->setTranslation('title', 'en', 'This is the title');
 $post->setTranslation('title', 'es', 'Este es el título');
 $title = $post->getTranslation('title', 'en');

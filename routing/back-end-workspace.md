@@ -10,7 +10,7 @@ This uses the PHP **autoload** feature. If you don't know this, PHP has a featur
 [https://www.php.net/manual/en/language.oop5.autoload.php](https://www.php.net/manual/en/language.oop5.autoload.php)
 {% endhint %}
 
-```php
+```
 <?php
 
 return [

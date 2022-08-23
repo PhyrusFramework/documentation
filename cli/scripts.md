@@ -1,17 +1,21 @@
 # Scripts
 
-You can create php scripts and run them with the CLI. The difference with running a simple php file, is that scripts have previously loaded the framework and your project, so all those functions and classes will be available.
+You can create php scripts and run them in the terminal. The difference with running a simple php file, is that scripts have previously loaded the framework and your project, so all those functions and classes will be available.
 
-To create scripts, just create a folder named **/scripts** in the root directory and place php files there. To run a php file use the following command:
-
-```
-php cli script <name>
-```
-
-Use the name without the extension. For example: **/scripts/check-files.php**:
+To create scripts, just use the following command:
 
 ```
-php cli script check-files
+php phyrus script create <name>
 ```
 
-This is very useful to run tasks from the terminal.
+This will just create a folder named "scripts" in your root directory, and inside a file named \<name>.php. That's something you could also do manually.
+
+Then, write there your code, and run this line to execute your script:
+
+```
+php phyrus script <name>
+```
+
+{% hint style="info" %}
+You don't need to include the extension (.php) when using the commands.
+{% endhint %}

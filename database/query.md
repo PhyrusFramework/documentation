@@ -2,13 +2,13 @@
 
 If you are not familiar with SQL and want an easier way to run queries, you can instead use the **Query** object:
 
-```php
+```
 $q = DB::query('table');
 ```
 
 Now you can use the query object to read or write from database:
 
-<pre class="language-php"><code class="lang-php">$users = DB::query('users')
+<pre><code>$users = DB::query('users')
     ->where('active', 1)
     ->limit(10)
     ->offset($page)
@@ -60,7 +60,7 @@ $arr = DB::query('user_friends')
 
 You can use a simple where condition:
 
-```php
+```
 $q->where('status', 'active')
 ```
 
@@ -70,7 +70,7 @@ Keep in mind that the value type matters. Strings are wrapped with quites, numbe
 
 Optionally, you can also use an operator:
 
-```php
+```
 $q->where('price', '>=', 100)
 $q->where('email', 'LIKE', '%gmail%');
 $q->where('ID', 'IN', [1, 2, 3]);
@@ -79,7 +79,7 @@ $q->where('ID', 'NOT IN', [1, 2, 3]);
 
 Sometimes you might need to write a SQL statement yourself, for that use **rawQuery**:
 
-```php
+```
 $q->rawQuery('createdAt > NOW() - INTERVAL 1 MONTH');
 
 // Parameters
@@ -92,7 +92,7 @@ $q->rawQuery('name = :name', [
 
 You can control AND and OR operators with the **or()** method:
 
-```php
+```
 $query
     ->where('a', '1')
     ->where('b', '2')
@@ -106,7 +106,7 @@ WHERE (a = '1' AND b = '2') OR (c = 3)
 
 Search **where in** or **where not in** another table:
 
-```php
+```
 $users = DB::query('users')
     ->whereIn('ID', 
         DB::query('group_users')
@@ -118,7 +118,7 @@ $users = DB::query('users')
 SELECT * FROM users WHERE ID IN (SELECT user_id FROM group_users WHERE group_id = 3)
 ```
 
-```php
+```
 DB::query('users')
     ->whereNotIn( ..., ... )
     ->get();

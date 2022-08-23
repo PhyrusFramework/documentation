@@ -55,6 +55,18 @@ Now write text on the image:
 $img->writeText( 'Hello!', [
     'color' => [$r, $g, $b],
     'size' => 12,
+    'font' => $pathToFontFile,
+    'position' => [150, 300]
+]);
+```
+
+However, writting text on an image is tricky, because you can't know if it will fit. For example, perhaps the text is too large or long and gets out of the image, therefore the text is cut,  instead of getting split in two lines.
+
+To solve this problem, you should check first the **area** that your text is going to occupy in the image:
+
+```php
+$area = $img->areaForText($text, [
+    'size' => 12,
     'font' => $pathToFontFile
 ]);
 ```

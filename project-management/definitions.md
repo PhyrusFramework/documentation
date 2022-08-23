@@ -8,13 +8,13 @@ The framework uses a set of "**terms**" mostly for directories, such as "front-e
 
 These terms are not hardcoded along the code, but listed in an internal configuration file so they can be easily changed. However, when the framework starts, they are dumped into a memory object named **Definitions**. For example:
 
-```
+```php
 Definitions::get('back');  // returns 'back-end'
 ```
 
 Using this class the terms can also be changed:
 
-```
+```php
 // Change the name of the directory "back-end" to "api"
 Definitions::set('back', 'api');
 ```
@@ -23,7 +23,7 @@ From now on, and while that line is in the code, the folder /back-end is renamed
 
 However, in order for this to work, definitions must be changed **before** launching the Router. So you should place it in the **/index.php** file in the **root folder**, right after the framework is loaded (composer) but before displaying the page:
 
-```
+```php
 <?php 
 require(__DIR__.'/vendor/autoload.php');
 
@@ -54,7 +54,7 @@ Then in your project you may have **multiple /back-end directories**, and set th
 
 index.php:
 
-```
+```php
 <?php 
 require(__DIR__.'/vendor/autoload.php');
 

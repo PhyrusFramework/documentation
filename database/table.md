@@ -6,7 +6,7 @@ description: Table ORM
 
 The **DBTable** object helps you with managing database tables:
 
-<pre class="language-php"><code class="lang-php">$t= DB::table('users');
+<pre><code>$t= DB::table('users');
 <strong>
 </strong><strong>$t->drop();
 </strong>
