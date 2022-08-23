@@ -8,7 +8,7 @@ The framework includes an **ORM** class. An ORM (**Object Relational Model**) is
 
 Through the ORM object we can automatically modify the database without making any queries, just by using the object:
 
-```
+```php
 $user = new User();
 $user->email = $email;
 $user->username = $username;
@@ -32,7 +32,7 @@ User::deleteWhere('active = 0');
 
 The ORM class **must** declare a **Definition** method which defines the columns of the database table. This method receives a [**DBBuilder** ](../database/create-tables.md)object that you need to use to define the name and columns of the table:
 
-```
+```php
 class Product extends ORM {
 
     function Definition(DBBuilder $builder) {
@@ -61,7 +61,7 @@ An ORM object can be initialized:
 * by ID
 * by a query row
 
-```
+```php
 $product = new Product();    // New ID = 0
 $product = new Product(34);  // Load ID = 34
 
@@ -71,7 +71,7 @@ $product = new Product($query->first);
 
 After saving, the ID is updated with the new ID:
 
-```
+```php
 $product = new Product();    // ID = 0
 $product->save();            // Now ID = 34
 ```
@@ -86,7 +86,7 @@ While in **development mode** (project.yaml -> development\_mode: true), the **O
 
 Otherwise, you can force the creation of the table by using:
 
-```
+```php
 $product->CheckTable();
 // or
 Product::CreateTable();
@@ -94,20 +94,20 @@ Product::CreateTable();
 
 The name of the table can be obtained from an instance or statically:
 
-```
+```php
 $table= $product->getTable();
 $table = Product::Table();
 ```
 
 You can drop the table with:
 
-```
+```php
 Product::dropTable();
 ```
 
 You can delete multiple rows using a condition with **deleteWhere**:
 
-```
+```php
 Product::deleteWhere('active = 0');
 Product::deleteWhere('name = :name', ['name' => $name]);
 ```

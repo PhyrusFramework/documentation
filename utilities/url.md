@@ -1,6 +1,6 @@
 # URL
 
-```
+```php
 URL::current();  
 // https://mysite.com/user/profile?param=value
 

@@ -10,7 +10,7 @@ Instead, use a different table (**users\_meta**) with the columns (user\_id, key
 | 236      | birth     | 1982-06-23 00:00:00 |
 | 322      | address   | Washington Avenue   |
 
-```
+```php
 $user->setMeta('address', $address);
 $address = $user->getMeta('address');
 $user->setMeta('address', null); // remove

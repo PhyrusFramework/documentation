@@ -2,7 +2,7 @@
 
 The **Validator** class is used to validate the format or contents of any variable (string, number, array, etc).
 
-```
+```php
 $validator = new Validator($value);
 // or
 Validator::for($value)

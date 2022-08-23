@@ -1,8 +1,8 @@
 # Array
 
-The **Arr** class is a wrapper for arrays that lets you do multiple operations on it. To initialize one we can use the constructor or the **arr()** method:
+The **Arr** class is a wrapper for arrays that lets you do multiple operations on it. To initialize one use the constructor or also the **arr()** method:
 
-```
+```php
 $arr = new Arr([...]);
 $arr = Arr::instance([...]);
 $arr = arr([...]);
@@ -10,7 +10,7 @@ $arr = arr([...]);
 
 **Arr** objects behave partially like a normal array:
 
-```
+```php
 $arr = new Arr([...]);
 $v = $arr['key'];
 $arr['key'] = $v;
@@ -21,16 +21,18 @@ foreach($arr as $k => $v) {...}
 
 The arr object can be converted back to an array using **getArray**():
 
-```
+```php
 $arr->getArray();
 ```
 
-With the arr object we can make many operations to the array:
+With the arr object we can make many operations on the array:
 
-```
-// map/iterate (like JS)
+```php
+// map like JS
 $list = $arr->map(function($item) {
-    return $item->toArray();
+    return [
+        'name' => $item->name
+    ];
 });
 
 if ($arr->has('key'))
@@ -63,7 +65,7 @@ $arr->print(false); // Print as text
 
 We can compare two arrays recursively using **equalTo**():
 
-```
+```php
 if ($arr->equalTo($another))
 ```
 
@@ -71,25 +73,25 @@ Accepts both an **array** or another **arr** object.
 
 ### Merge arrays recursively
 
-```
+```php
 $arr->merge($another, $mergeNoAssoc? = false);
 ```
 
-The second parameter decides whether **no associative arrays** must be merged or not. An associative array is a dictionary, formed by pairs of key-value. When the array is not associative, it's a normal lineal list: \[a,b,c,d] where keys are the index position (0, 1, 2, 3).
+The second parameter decides whether **no associative arrays** must be merged or not. An associative array is a dictionary, formed by pairs of key-value. When the array is **not associative**, it's a normal lineal list: \[a,b,c,d] where keys are the index position (0, 1, 2, 3).
 
-When merging associative arrays, these may contain non-associative arrays, what's the right strategy then? Example:
+When merging associative arrays, these may contain non-associative arrays, what's the right merging strategy then? Example:
 
 ```
 Merge
 [ 'lang' => 'en', 'languages' => ['en', 'es'] ]
-&
++
 [ 'language' => ['en', 'fr'] ]
 
-// Option 1: Overwrite
+// Option 1: Overwrite the list
 Result:
 [ 'lang' => 'en', 'languages' => ['en', 'fr'] ]
 
-// Option 2: Mix
+// Option 2: Merge the list
 [ 'lang' => 'en', 'languages' => ['en', 'es', 'fr'] ]
 ```
 
@@ -97,16 +99,22 @@ Depending on the situation, non-associative arrays must be mixed or overwritten.
 
 ### Force structure
 
-The **force** method converts an array to a desired structure with default values:
+The **force** method forces a desired structure on an array with default values:
 
-```
-$arr->force($defaults);
+```php
+// There is this list
+$arr = [
+    'lang' => 'js', 
+    'framework' => 'vue'
+];
 
-$arr = arr(['lang' => 'js', 'framework' => 'vue']);
-$arr->force([
-    'lang' => 'php',
+// And we want this structure
+$struc = [
+    'lang' => 'php',    // <-- default values
     'version' => '7.4'
-]);
+];
+
+arr($arr)->force($struc);
 
 // Result
 [
@@ -115,4 +123,4 @@ $arr->force([
 ]
 ```
 
-The "**framework**" key disappears because it was not specified in the **$defaults** structure. "**lang**" keeps its value because it was present in the array, while "**version**" was not and takes the default value.
+The "**framework**" key disappears because it was not specified in the **$struc** structure. "**lang**" keeps its value because it was present in the array, while "**version**" was not and takes the default value.

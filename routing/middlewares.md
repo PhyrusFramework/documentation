@@ -8,7 +8,7 @@ Like routes, middlewares can be detected **automatically by the directory struct
 
 To create a route automatically, just create a file inside **/back-end/middlewares** returning a function that will **return false** to prevent the access:
 
-```
+```php
 // /back-end/middlewares/auth.php
 
 return function($req, $params) {
@@ -19,7 +19,7 @@ return function($req, $params) {
 
 Alternatively you can also define the middleware manually somewhere else by name:
 
-```
+```php
 Router::addMiddleware('auth', function($req, $params) {
    if (!$logged)
       return false;
@@ -30,10 +30,10 @@ Router::addMiddleware('auth', function($req, $params) {
 
 A middleware can be used globally for a whole route (all of its methods) or specifically for a method:
 
-```
+```php
 // Globally
 return [
-    'middleware' => 'auth',
+    'middleware' => 'auth',p
     
     'GET' => function($req) {...},
     'POST' => function($req) {...}
@@ -73,7 +73,7 @@ In this last example, the route with the POST method will only use the **auth** 
 
 Sometimes you would want to combine multiple middlewares so you reuse the code, instead of repeating it. For this purpose, you can use **Router::useMiddleware**:
 
-```
+```php
 Router::addMiddleware('my-custom', function($req) {
 
    // First check if user is logged using the other 'auth' middleware

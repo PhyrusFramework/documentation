@@ -23,7 +23,7 @@ Hence, the **AdvancedORM** class **extends the previous ORM class,** but also us
 
 The declaration works exactly like the basic ORM:
 
-```
+```php
 class User extends AdvancedORM {
     function Definition(DBBuilder $builder) {...}
 }
@@ -37,7 +37,7 @@ During **development mode** tables are automatically created **when the ORM is u
 
 To create the tables of a model, you can run this line:
 
-```
+```php
 (new Model())->CheckTable(true);
 ```
 
@@ -45,13 +45,13 @@ To create the tables of a model, you can run this line:
 
 By default the extra tables will be named as the model table + '\_whatever':
 
-```
+```php
 users, users_metadata, users_translations, users_resources
 ```
 
 If you don't like these names, you can change any of them using these methods:
 
-```
+```php
 class User extends AdvancedORM {
     function meta_table() {
         return 'user_meta';
@@ -73,7 +73,7 @@ products --> products\_id
 
 If you don't agree with this nomenclature, you can customize the name of this column with the **reference\_column** method:
 
-```
+```php
 class Product extends AdvancedORM {
 
     function reference_column() {

@@ -20,7 +20,6 @@
 * [CRUD](routing/crud.md)
 * [Request & Params](routing/request-and-params.md)
 * [Back-End workspace](routing/back-end-workspace.md)
-* [Redirections](routing/redirections.md)
 
 ## Database
 

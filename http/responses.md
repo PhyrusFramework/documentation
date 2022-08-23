@@ -6,7 +6,7 @@ description: HTTP Responses
 
 By default, any route will automatically return a response 200 OK. But an API will need to return specific response codes and messages (400, 401, 403, 404, 405...). That can be done with the **response** method:
 
-```
+```php
 response(400);
 
 // To end the process:
@@ -20,7 +20,7 @@ response([
 
 However, Phyrus helps you with this task so you don't have to remember every code and what it means. You can just use the method **response** with a **string**:
 
-```
+```php
 response('bad');                // 400
 response('forbidden');          // 403
 response('unauthorized');       // 401
@@ -33,13 +33,13 @@ response('method-not-allowed'); // 405
 
 Optionally, you can add a second parameter which will be the body of the response:
 
-```
+```php
 response('bad', 'Name field is missing');
 ```
 
 If the parameter is an array, it will be automatically converted to **JSON**:
 
-```
+```php
 response('bad', [
     'message' => 'Name field is missing'
 ]);
@@ -47,7 +47,7 @@ response('bad', [
 
 If you want to finalize the execution right after the response, you could just use **die**(), but you can also use the method **response\_die**(), which is the same:
 
-```
+```php
 response_die('bad');
 // Program ends here
 ```

@@ -7,7 +7,7 @@ The **Uploader** class is a helper to handle:
 * Control access to them
 * Generate image sizes
 
-```
+```php
 // If there's at least one file, take the first:
 $file = Uploader::getFile();
 
@@ -29,7 +29,7 @@ Public files are always accessible via direct URL to the file.
 
 By default, public files will be stored in **/public/uploads** and private files will be stored in **/uploads**. Nevertheless, this is a configuration that can be customized, found in **config/project.yaml**:
 
-```
+```php
 uploads:
   publicDir: "uploads"
   privateDir: "uploads"
@@ -41,7 +41,7 @@ Change it as you like. However keep in mind that the public directory starts fro
 
 Here's an example of saving an uploaded file:
 
-```
+```php
 $file = Uploader::getFile();
 
 $file->savePrivate('documents/doc.pdf');
@@ -54,7 +54,7 @@ $file->savePublic('documents/doc.pdf');
 
 If the file already existed, you need to confirm you want to **overwrite** it (delete the previous file) by adding **true** as second parameter:
 
-```
+```php
 Uploader::savePublic('doc.pdf', true);
 ```
 
@@ -62,7 +62,7 @@ Uploader::savePublic('doc.pdf', true);
 If you don't want to think how to name the uploaded file, you can just use the **GUID()** method to generate a unique identifier.
 {% endhint %}
 
-```
+```php
 Uploader::savePublic( GUID() . '.pdf');
 ```
 
@@ -92,7 +92,7 @@ These sizes are the **limit** of the image size, width or height, keeping the as
 
 Then, the **Uploader** will handle this resizing and compressing process for you, just use **saveImage** instead of savePublic. The image will be stored with a unique name generated with **GUID()**:
 
-```
+```php
 $imageName = Uploader::getFile()
     ->saveImage()
     ->name;    // xxxxxxxxx.jpg
@@ -115,7 +115,7 @@ The uploader will automatically detect if the image is jpg or png
 
 To get the path to the stored file use:
 
-```
+```php
 $uploader->relativePath();
 $uploader->absolutePath();
 

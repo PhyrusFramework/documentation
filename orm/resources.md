@@ -4,7 +4,7 @@ Resources refer to files, like images or PDFs. However, **uploading and storing*
 
 The ORM will just store the **path** to the file. The method **addResource** will return an **ORMResource** object.
 
-```
+```php
 $resource = $user->addResource($type, $file);
 $resource = $user->addResource('profile_photo', '/uploads/images/xxx.jpg');
 
@@ -30,7 +30,7 @@ So a user **can have multiple resources of a type**. That's why the method is ca
 
 So, in the first case we need to detect if there was already a resource and **replace** it:
 
-```
+```php
 // Single file
 $profilePhotos = $user->getResources('profile');
 
@@ -62,7 +62,7 @@ So each Resource has a **position** property, and they will be obtained sorted b
 
 But they can be re-ordered by using the **move** methods:
 
-```
+```php
 $res = $user->getResources('photos')[3]; // 4th photo
 
 $res->moveUp();  // 4 -> 3

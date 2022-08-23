@@ -8,13 +8,13 @@ The **DATABASE** class holds the connection to a database. By default, the proje
 
 &#x20;This database can be used by the shortcut **DB**:
 
-```
+```php
 $res = DB::run('SELECT * FROM users');
 ```
 
 However you can connect to another database creating a new **Database** object:
 
-```
+```php
 $db = new DATABASE([
     'host' => 'localhost',
     'database' => 'name',
@@ -29,7 +29,7 @@ $res = $db->run('SELECT * FROM users');
 
 When you run a query, the method will return a **DBQueryResult** object.
 
-```
+```php
 $res = DB::run("SELECT * FROM users");
 $res->query;        // "SELECT * FROM users"
 $res->error;        // null
@@ -50,7 +50,7 @@ When using parameters inside of queries, you need to be **very careful**, since 
 
 Example: imagine your front-end allows to search a user by email, so your users write in an \<input type="email">, and then you run:
 
-```
+```sql
 SELECT * FROM users WHERE email = $email
 ```
 
@@ -60,7 +60,7 @@ Then, instead of an email, a user decides to write _"; DELETE FROM users;"_. The
 
 The first query would fail, but the second would work, and all the users in your database would be gone. 😱 To protect you from these kind of attacks, queries use **prepared statements**. This basically means that you pass parameters aside:
 
-```
+```php
 DB::query("SELECT * FROM users WHERE email = :email", [
     'email' => $email
 ]);
@@ -78,7 +78,7 @@ Using prepared statements will convert html special characters before writing th
 
 To write HTML, you need to use an **InsecureString** object:
 
-```
+```php
 DB::query("INSERT INTO htmlBlocks (body) VALUES (:body)", [
     'body' => new InsecureString('<p>HTML body</p>');
 ]);
@@ -86,7 +86,7 @@ DB::query("INSERT INTO htmlBlocks (body) VALUES (:body)", [
 
 However, your HTML body might contain a \<script> tag inserted by the user with malicious intentions, which would lead to a **XSS Attack.** To prevent this attack, you must **remove script tags** from the body:
 
-```
+```php
 $str = new InsecureString('Code: <script>alert('error!')</script>');
 $str->removeScriptTags();
 
