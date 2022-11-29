@@ -12,7 +12,7 @@ CORS consists in listing which **Origins** (clients) are allowed to make HTTP re
 
 To implement CORS, clients / browsers must use **preflight** requests. That means that, whenever a request is made, a previous request with the method **OPTIONS** is sent. When the server receives the OPTIONS request, decides whether the client is allowed or not to access and returns a response (200 OK / 401 Not authorized). If this preflight request is not successful, the real request will never be made by the client, aka, the browser.
 
-If you develop your own client (mobile native app, desktop app) CORS is optional and, being honest, most of developer won't implement it. However, if your application is intended for web (also mobile apps based on webviews, like Ionic), CORS is mandatory because browsers enforce it and you can't disable it, so you'll have to implement it server-side, or requests will be blocked due to the CORS protocol.
+If you develop your own client (mobile native app, desktop app) CORS is optional and, being honest, most of developers won't implement it. However, if your application is intended for web (also mobile apps based on webviews, like Ionic), CORS is mandatory because browsers enforce it and you can't disable it, so you'll have to implement it server-side, or requests will be blocked due to the CORS protocol.
 
 Good for you, Phyrus helps with that. CORS is already implemented by Phyrus, and you can configure it in the configuration (**web.yaml --> CORS**):
 

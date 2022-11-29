@@ -1,6 +1,6 @@
 # Only API, remove front
 
-Phyrus has the option to remove the front-end feature and leave only the back-end side to develop an API (or anything else but views). That's useful if the front-end is being developed by someone else as an independent project, so the back-end project doesn't need all of this front-end stuff around.
+Phyrus has the option to remove the front-end feature and leave only the back-end side to develop an API (or anything else but views). That's useful if the front-end is being developed aside by someone else as an independent project, so the back-end project doesn't need all of this front-end stuff around.
 
 Right after starting your phyrus project, run this command in the root directory:
 

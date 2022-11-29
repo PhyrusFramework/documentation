@@ -1,6 +1,6 @@
 # CRUD
 
-CRUD is a term that stands for **Create-Read-Update-Delete**. It refers to the standard routes (defined by the API Restful standard) that are normally defined to manage a model/entity in our platform.
+CRUD is a term that stands for **Create-Read-Update-Delete**. It refers to the standard routes (defined by the API Restful standard) that are normally defined to manage a model/entity in your platform.
 
 For example, imagine a platform where users post videos. The API would offer routes like these:
 
@@ -12,9 +12,9 @@ PUT    /api/videos/:id   Edit a video
 DELETE /api/videos/:id   Delete a video
 ```
 
-You could create these routes using any of the other routing methods explained previously. But a faster and cleaner method is using the **CRUD** class:
+You could create these routes using any of the other routing methods explained previously. But a faster and cleaner way to do it is using the **CRUD** class:
 
-<pre><code><strong>CRUD::instance('/api/videos')
+<pre class="language-php"><code class="lang-php"><strong>CRUD::instance('/api/videos')
 </strong>
     // GET /api/videos
     ->list(function($req) {
@@ -46,7 +46,7 @@ You could create these routes using any of the other routing methods explained p
     ->generate();
     </code></pre>
 
-The CRUD class defines a base URL (/api/videos), and the has these methods: **list, get, create, edit, delete**, to define the CRUD routes.
+The CRUD class defines a base URL (/api/videos), and then has these methods: **list, get, create, edit, delete**, to define the CRUD routes.
 
 {% hint style="info" %}
 Notice that there's **five of them** instead of four, that's because the READ in C**R**UD would actually correspond to two endpoints, one to get the list of items (GET /api/videos) and another one to get a specific item (GET /api/videos/:id).
@@ -61,7 +61,7 @@ Sometimes it's also necessary to create additional features and routes on your e
 
 The CRUD class allows you to add these as **custom routes**:
 
-```
+```php
 CRUD::instance('/api/videos')
 
     ->custom('PUT', '/:id/like', function($req, $params) {
@@ -81,7 +81,7 @@ The custom methods specified the **method**, the route **added to the base route
 
 A CRUD can also use a middleware for its routes:
 
-```
+```php
 CRUD::instance('/api/videos')
     ->middleware('auth')
     ->delete()        // DELETE /api/videos/:id
@@ -90,7 +90,7 @@ CRUD::instance('/api/videos')
 
 It's possible, however, that different endpoints for the same entity require different middlewares or permissions. For example, imagine that unauthenticated users can see posted videos, but not create them. Then you should use two different CRUDs:
 
-```
+```php
 CRUD::instance('/api/videos')
     ->list()        // GET/api/videos
     ->generate();

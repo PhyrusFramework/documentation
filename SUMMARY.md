@@ -4,7 +4,7 @@
 
 ## Getting started
 
-* [Setup guide](getting-started/setup-guide.md)
+* [Start project](getting-started/setup-guide.md)
 * [React or Angular](getting-started/react-or-angular.md)
 * [Project Structure](getting-started/project-structure.md)
 * [Configuration](getting-started/configuration-file.md)
@@ -16,8 +16,8 @@
 
 * [Back-End & Front-End routing](routing/back-end-and-front-end-routing.md)
 * [Routing methods](routing/routing-strategies.md)
-* [Middlewares](routing/middlewares.md)
 * [CRUD](routing/crud.md)
+* [Middlewares](routing/middlewares.md)
 * [Request & Params](routing/request-and-params.md)
 * [Back-End workspace](routing/back-end-workspace.md)
 

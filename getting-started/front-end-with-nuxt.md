@@ -18,7 +18,7 @@ The documentation for this package is currently still in development. Soon will 
 
 While in development, if you access **http://localhost**, you won't see your changes, you'll need to run the Nuxt local server (as explained before) and use **http://localhost:3000**.
 
-Once you're finished (or if you want to update your production files) run this command in your **root folder** to compile your front-end proejct and update the content in the /public directory:
+Once you've finished (or if you want to update your production files) run this command in your **root folder** to compile your front-end project and update the content in the /public directory:
 
 ```
 php cli nuxt sync

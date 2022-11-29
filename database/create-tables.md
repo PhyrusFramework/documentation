@@ -44,7 +44,7 @@ Phyrus has a method **create\_tables** that allows you to store the definition o
 ]
 ```
 
-```
+```php
 $json = JSON::fromFile($file);
 
 DB::create_tables($json);             // Create all
@@ -55,13 +55,14 @@ DB::create_table($name, $columns);    // Create single
 
 Another alternative is using the **DBBuilder** class. This lets you create tables in a much more visual and simple way:
 
-```
+```php
 $builder = new DBBuilder();
 
 $builder->name('posts')  // Table 'posts'
 
     ->column('ID', 'BIGINT')
         ->autoIncrement()
+        ->primary()
 
     ->column('url', 'TEXT')
         ->unique()

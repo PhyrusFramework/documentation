@@ -1,8 +1,8 @@
 # React or Angular
 
-The framework brings Nuxt as its Front-End framework by default. But Phyrus is perfectly capable of working with any Front-End framework, such as React or Angular, and now you will learn how to change your front-end framework if you desire to.
+Phyrus brings Nuxt as its Front-End framework by default. But Phyrus is perfectly capable of working with any other Front-End framework, such as React or Angular, and now you will learn how to change your front-end framework if you desire to.
 
-However, for now Phyrus will only officially support Nuxt because the project brings a npm package (**phyrus-nuxt**) which helps the developer with front-end stuff, such as UI Components, making API calls, uploading files, etc, so this package would need to be replicated for every other supported framework. Nevertheless, if you don't mind losing this feature, feel free to switch to React or Angular, or any other.
+However, for now Phyrus will only officially support Nuxt because the project brings an npm package (**phyrus-nuxt**) which helps with front-end development, with tools such as UI Components, making API calls, uploading files, etc, so this package would need to be replicated for every other supported framework. Nevertheless, if you don't mind losing this feature, feel free to switch to React, Angular or any other.
 
 #### Switch framework
 
