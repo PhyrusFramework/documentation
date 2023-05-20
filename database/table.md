@@ -6,9 +6,9 @@ description: Table ORM
 
 The **DBTable** object helps you with managing database tables:
 
-<pre><code>$t= DB::table('users');
-<strong>
-</strong><strong>$t->drop();
+<pre class="language-php"><code class="lang-php">$t= DB::table('users');
+
+<strong>$t->drop();
 </strong>
 $t->empty(); // Remove everything inside
 
@@ -27,4 +27,5 @@ $t->addColumn([
     'foreign' => 'users(ID)'
 ]);
 
-$t->dropColumn('email');</code></pre>
+$t->dropColumn('email');
+</code></pre>

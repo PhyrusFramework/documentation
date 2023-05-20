@@ -36,7 +36,7 @@
 * [Metadata](orm/metadata.md)
 * [Translations](orm/translations.md)
 * [Resources](orm/resources.md)
-* [Search ORMs](orm/search-orms.md)
+* [Query ORM objects](orm/search-orms.md)
 * [ORM Serialization](orm/orm-serialization.md)
 
 ## HTTP
@@ -86,3 +86,7 @@
 * [CLI Config](cli/cli-config.md)
 * [CLI Front](cli/cli-front.md)
 * [CLI Cron](cli/cli-cron.md)
+
+## migration
+
+* [2.0.4 to 2.0.5](migration/2.0.4-to-2.0.5.md)

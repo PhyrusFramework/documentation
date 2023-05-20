@@ -12,7 +12,7 @@ Now you can use the query object to read or write from database:
     ->where('active', 1)
     ->limit(10)
     ->offset($page)
-    ->orderBy('created_at DESC')
+    ->orderBy('created_at', 'DESC')
     ->get();
     
 $users = DB::query('users')
@@ -54,7 +54,8 @@ $arr = DB::query('user_friends')
         'users.name',
         'user_friends.friend_id'
     )->get();
-    </code></pre>
+    
+</code></pre>
 
 ### Conditions
 
@@ -93,15 +94,28 @@ $q->rawQuery('name = :name', [
 You can control AND and OR operators with the **or()** and **and()** methods:
 
 ```php
+WHERE a = 1 OR (b = 2)
 $query
     ->where('a', 1)
-    ->where('b', 2)
     ->or(function($q) {
-       $q->where('c', 3);
+       $q->where('b', 2);
     );
+$query
+    ->where('a', 1)
+    ->orWhere('b', 2);
     
-WHERE a = 1 AND b = 2 OR (c = 3)
+WHERE (a = 1 OR b = 2) AND (c = 3 OR d = 4);
+$query
+    ->or(function($q) {
+        $q->where('a', 1)
+            ->where('b', 2);
+    })
+    ->or(function() {
+        $q->where('c', 3)
+            ->where('d', 4);
+    });
 
+WHERE a = 1 AND b = 2 AND (c = 3 OR (d = 4))
 $query
     ->where('a', 1)
     ->where('b', 2)
@@ -111,8 +125,6 @@ $query
             $q->where('d', 4);
         });
     });
-    
-WHERE a = 1 AND b = 2 AND (c = 3 OR (d = 4))
 ```
 
 ### Nested queries

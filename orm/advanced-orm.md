@@ -4,15 +4,15 @@ description: Expands the power of the ORM to another level
 
 # Advanced ORM
 
-The basic ORM class seen [before ](orm.md)is a 1:1 representation of a database table.&#x20;
+The basic ORM class seen [before ](orm.md)is a 1:1 representation of a database table.
 
 class User --> table users
 
 But, usually when developing an application, the reality is that an entity is composed of mutiple tables such as these:
 
-* ****[**Metadata**](metadata.md): dynamic values
-* ****[**Translations**](translations.md): translatable strings
-* ****[**Resources**](resources.md): attached files, images, documents
+* **Metadata**: dynamic values
+* **Translations**: translatable strings
+* **Resources**: attached files, images, documents
 
 Hence, the **AdvancedORM** class **extends the previous ORM class,** but also uses these 4 tables:
 

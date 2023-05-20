@@ -61,8 +61,14 @@ $builder = new DBBuilder();
 $builder->name('posts')  // Table 'posts'
 
     ->column('ID', 'BIGINT')
+        ->unsigned()
         ->autoIncrement()
         ->primary()
+    // Or shorter:
+    ->idColumn()
+    
+    // With a different name
+    ->idColumn('id')
 
     ->column('url', 'TEXT')
         ->unique()
@@ -74,6 +80,12 @@ $builder->name('posts')  // Table 'posts'
         
     ->column('author', 'BIGINT')
         ->references('users(ID)') // foreign key
+        
+    // or shorter:
+    ->foreignId('user_id'); // automatically sets table to "users"
+    
+    // If table name does not match with "xxxx_id", then:
+    ->foreignId('category_id', 'categories');
     
     ->execute();
 ```

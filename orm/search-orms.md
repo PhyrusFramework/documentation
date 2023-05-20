@@ -2,7 +2,7 @@
 description: Search ORM objects in the database
 ---
 
-# Search ORMs
+# Query ORM objects
 
 Both simple ORMs and Advanced ORMs have methods to easily search and find entries in the database.
 
@@ -25,7 +25,7 @@ $user = User::findID(23);  // Find user with ID 23
 The **findID** method autoamtically converts the parameter to a number, so you can pass a string.
 {% endhint %}
 
-Another option is tu use the [Query](../database/query.md) object:
+Another option is to use the [Query](../database/query.md) object:
 
 ```php
 $users = User::query()
@@ -38,6 +38,35 @@ $users = User::query()
 $user = User::query()
         ->where('email', $email)
         ->first();
+```
+
+### Add properties to serialization
+
+Queried models, when serialized will create an object with the model properties (columns). There are two ways of adding more properties to the serialization.
+
+First is by manually adding a value to each model:
+
+```php
+$objects = Model::query()->get();
+foreach($objects as $object) {
+   $object->addSerializationProperty('name', 'value');
+}
+```
+
+The second way is by adding an external column from another table:
+
+```php
+Modal::query()
+    ->join('other_table', 'models.col1', 'other_table.col2')
+    ->map('col2');
+```
+
+Now, all queried objects will have **col2**, which is a column from **other\_table**, as a property. If you want to give it a different name, or cast the variable to another type:
+
+```php
+Modal::query()
+    ->join('other_table', 'models.col1', 'other_table.col2')
+    ->map('col2', 'int', 'newPropertyName');
 ```
 
 ### Advanced ORM search
